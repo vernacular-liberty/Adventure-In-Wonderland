@@ -9,6 +9,7 @@ public class Character {
     int health;
     Boolean hasPill;
     Boolean hasFungi;
+    Bag bag;
 
      /**
      * Constructs a wonderland character.
@@ -29,6 +30,7 @@ public class Character {
         this.health = 100;
         this.hasPill = false;
         this.hasFungi = false;
+        this.bag = new Bag();
 
     }
 }
