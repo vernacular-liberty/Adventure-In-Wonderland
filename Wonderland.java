@@ -41,19 +41,19 @@ public class Wonderland{
             System.out.println("You can use use(\"door\") to learn more.");    
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("croquet")){
-            //this.croquet.play();
             System.out.println("Play Croquet");
+            this.croquet.play(this.character.size, this.character.health);
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
-            //this.fungiForrest.conversation()
+            this.fungiForrest.conversation()
             System.out.println("Caterpillar Conversation");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("Tugley woods")){
-            //this.tugleyWoods.play()
+            this.tugleyWoods.play();
             System.out.println("Tugley Woods");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("gabeled")){
-            //this.marchManner.play();
+            this.marchManner.play();
             System.out.println("March Manner");
 
         }if (this.character.canFly && (this.map[this.character.locationC][this.character.locationR].contains("pill") || this.map[this.character.locationC][this.character.locationR].contains("fungi") 

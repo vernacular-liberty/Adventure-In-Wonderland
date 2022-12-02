@@ -6,7 +6,7 @@ public class Character {
     int locationR;
     Boolean canFly;
     Boolean canWalk;
-    int health;
+    double health;
     Boolean hasPill;
     Boolean hasFungi;
     Bag bag;
