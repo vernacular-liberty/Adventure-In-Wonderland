@@ -2,17 +2,18 @@
 import java.util.Scanner;
 
 public class RabbitHole {
-
     int numTea;
     int numJam;
     int numScone;
     String book;
+    Character character;
 
-    public RabbitHole(){
+    public RabbitHole(Character character){
         this.numTea = 6;
         this.numJam = 8;
         this.numScone = 5;
         this.book = "\"Welcolme to Wonderland!\"";
+        this.character = character;
     }
     
     /**
@@ -29,14 +30,16 @@ public class RabbitHole {
 
     int count = 5;
 
-    Scanner input = new Scanner(System.in);
+    Scanner inputCommand = new Scanner(System.in);
     while (count >=0) {
         count -= 1;
         //create scanner 
-        String command = input.nextLine();
+        String command = inputCommand.nextLine();
         userAction(command);
-     }
-    input.close();
+     
+    }
+    
+    inputCommand.close();
     
     }
 
@@ -51,13 +54,17 @@ public class RabbitHole {
             if (command.contains("book")){
                 System.out.println("You open the book, on the first page it says: " + this.book);
             }
-        } else {
+        } if (command.contains("eat")){
+            this.character.health +=5;
+
+        }else {
             System.out.print("I don't know that command yet.");
         }
     }
 
     public static void main(String[] args){
-        RabbitHole r = new RabbitHole();
+        Character a = new Character("name", 1, 1);
+        RabbitHole r = new RabbitHole(a);
         r.play();
     }
 }
