@@ -1,30 +1,34 @@
 //imports
 import java.util.Scanner;
+import java.util.Random;
 
 public class Wonderland{
     String[][] map = new String[5][5];
-    private Character character;
     private Croquet croquet;
     private FungiForrest fungiForrest;
     private RabbitHole rabbitHole;
     private MarchManner marchManner;
     private TugleyWoods tugleyWoods;
+    Character character;
 
 
-    public Wonderland(){
+    public Wonderland(Character character){
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long treck throught the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
         {"You have entered the croquet grounds. An intense game is taking place between Tweedledee and Tweedledum.","You have reached the grandest Castle in all the land, the castle of the queen of hearts.", "Court House", "You have reached the royal rose gardens.", "You are at the base of the mountains of division."}, 
         {"You have reached the Mad Hatters house. It appear there is a tea party in session!", "You have reached the duchesses manner.", "You emerge from the woods into a meadow surrounding a small gabled house. You enter the house on the table is a container of pills.", "You enter a grove of massive mushrooms. Your eyes meet those of caterpillar who ignores you and takes a drag of a long hookah.", "Chilled to the bone you hurry on through the woods in the hopes of finding shelter."}, 
         {"Welcome to the dismal mire...","You found a river. Should you drink the water? It could be dangerous...Strange things happen in Wonderland...", "Giant dragonflies swarm through the sky over your head squabling over potential perches.","The trees around you begin to morph into oversized mushrooms. You are pleased pick some fungi and arrange them into a bouquet. Your stomache growls...", "You sense someone is watching you in the darkness! Move faster"}, 
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
-        this.character = new Character("Alice", 58, 58, 3, 3);
+        this.character = character;
         this.croquet = new Croquet();
         this.fungiForrest = new FungiForrest();
-        this.rabbitHole = new RabbitHole();
         this.marchManner = new MarchManner();
         this.tugleyWoods = new TugleyWoods();
+        this.rabbitHole = new RabbitHole(this.character);
 
+    }
+    public void start(){
+        this.rabbitHole.play();
     }
     
     public void investigate(){
@@ -65,6 +69,23 @@ public class Wonderland{
         }
     }
 
+    // public void promptEnterKey(){
+    //     Scanner readinput = new Scanner(System.in);
+
+    //     String enterkey = "Press \"ENTER\" to continue...";
+    //     System.out.print(enterkey);
+    
+    
+    //     enterkey = readinput.nextLine();
+    //      System.out.print(enterkey);
+    
+    //     if(enterkey.equals("")){
+    
+    //         System.out.println("It works!");
+    //     }
+    //     readinput.close();
+    //  }
+
     public static void main(String[] args){
 
         System.out.println("Welcome to your adventure in wonderland!");
@@ -72,15 +93,28 @@ public class Wonderland{
         //game loop
         boolean runGame = true;
 
-        Wonderland game = new Wonderland();
-        game.rabbitHole.play();
         while (runGame == true){
-            System.out.println("1.-------------------------------------");
-            Scanner input = new Scanner(System.in);
-            String name = input.nextLine();
-            System.out.println(name);
-            input.close();
+            System.out.println("Chose your character!!");
+            System.out.println("***********************");
+
+            System.out.println("Enter your characters name: ");
+            Scanner inputName = new Scanner(System.in);
+            String name = inputName.nextLine();
+            inputName.close();
+            Random random = new Random();
+
+            Character character = new Character(name, random.nextInt(5), random.nextInt(5));
+            Wonderland wonderland = new Wonderland(character);
+            System.out.println("Enter your characters name: ");
+
+            System.out.println("***********************");
+            //wonderland.promptEnterKey();
+
+            wonderland.start();
+
 
         }
+
+
     }
 }
