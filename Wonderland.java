@@ -5,9 +5,9 @@ public class Wonderland{
     String[][] map = new String[5][5];
     private Character character;
     private Croquet croquet;
-    private FungiForrest fungiForrest;
+    private FungiForest fungiForest;
     private RabbitHole rabbitHole;
-    private MarchManner marchManner;
+    private MarchManor marchManor;
     private TugleyWoods tugleyWoods;
 
 
@@ -19,10 +19,10 @@ public class Wonderland{
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
         this.character = new Character("Alice", 58, 58, 3, 3);
-        this.croquet = new Croquet();
-        this.fungiForrest = new FungiForrest();
+        this.croquet = new Croquet(0, null, null);
+        this.fungiForest = new FungiForest();
         this.rabbitHole = new RabbitHole();
-        this.marchManner = new MarchManner();
+        this.marchManor = new MarchManor();
         this.tugleyWoods = new TugleyWoods();
 
     }
@@ -45,7 +45,7 @@ public class Wonderland{
             this.croquet.play(this.character.size, this.character.health);
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
-            this.fungiForrest.conversation();
+            this.fungiForest.conversation();
             System.out.println("Caterpillar Conversation");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("Tugley woods")){
@@ -53,8 +53,8 @@ public class Wonderland{
             System.out.println("Tugley Woods");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("gabeled")){
-            this.marchManner.play();
-            System.out.println("March Manner");
+            this.marchManor.play();
+            System.out.println("March Manor");
 
         }if (this.character.canFly && (this.map[this.character.locationC][this.character.locationR].contains("pill") || this.map[this.character.locationC][this.character.locationR].contains("fungi") 
         || this.map[this.character.locationC][this.character.locationR].contains("water") || this.map[this.character.locationC][this.character.locationR].contains("door") 
@@ -71,16 +71,15 @@ public class Wonderland{
 
         //game loop
         boolean runGame = true;
-
-        Wonderland game = new Wonderland();
-        game.rabbitHole.play();
+        //Wonderland = wonderland.newgame();
         while (runGame == true){
             System.out.println("1.-------------------------------------");
             Scanner input = new Scanner(System.in);
             String name = input.nextLine();
-            System.out.println(name);
             input.close();
 
         }
+
+
     }
 }
