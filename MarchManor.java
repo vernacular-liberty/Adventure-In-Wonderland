@@ -1,4 +1,4 @@
-public class MarchManner {
+public class MarchManor {
     
     public void play(){
         
