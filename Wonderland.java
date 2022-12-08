@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Wonderland{
     String[][] map = new String[5][5];
-    private Croquet croquet;
+    //private Croquet croquet;
     private FungiForrest fungiForrest;
     private RabbitHole rabbitHole;
     private MarchManner marchManner;
@@ -20,7 +20,6 @@ public class Wonderland{
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
         this.character = character;
-        this.croquet = new Croquet();
         this.fungiForrest = new FungiForrest();
         this.marchManner = new MarchManner();
         this.tugleyWoods = new TugleyWoods();
@@ -49,8 +48,9 @@ public class Wonderland{
             System.out.println("You can use use(\"door\") to learn more.");    
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("croquet")){
+            Croquet croquet = new Croquet(this.character);
             System.out.println("Play Croquet");
-            this.croquet.play(this.character.size, this.character.health);
+            croquet.play();
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
             this.fungiForrest.conversation();
