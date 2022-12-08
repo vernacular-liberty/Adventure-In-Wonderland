@@ -1,6 +1,7 @@
 //import
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Character {
     String[][] map = new String[5][5];
@@ -15,6 +16,7 @@ public class Character {
     Boolean hasPill;
     Boolean hasFungi;
     ArrayList<String> bag;
+    Scanner scan;
 
 
      /**
@@ -23,7 +25,7 @@ public class Character {
      * @param locationC the location of the character column on the map.    
      * @param locationR the location of the character row on the map.
      */
-    public Character(String n, int locationC, int locationR){
+    public Character(int locationC, int locationR){
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long treck throught the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
         {"You have entered the croquet grounds. An intense game is taking place between Tweedledee and Tweedledum.","You have reached the grandest Castle in all the land, the castle of the queen of hearts.", "Court House", "You have reached the royal rose gardens.", "You are at the base of the mountains of division."}, 
         {"You have reached the Mad Hatters house. It appear there is a tea party in session!", "You have reached the duchesses manner.", "You emerge from the woods into a meadow surrounding a small gabled house. You enter the house on the table is a container of pills.", "You enter a grove of massive mushrooms. Your eyes meet those of caterpillar who ignores you and takes a drag of a long hookah.", "Chilled to the bone you hurry on through the woods in the hopes of finding shelter."}, 
@@ -33,7 +35,6 @@ public class Character {
         int s = ThreadLocalRandom.current().nextInt(36, 84 + 1);
         ArrayList<String> bag = new ArrayList<String>(10);
         this.bag = bag;
-        this.name = n;
         this.size = s;
         this.originalSize = s;
         this.locationC = locationC;
@@ -43,7 +44,34 @@ public class Character {
         this.health = 50;
         this.hasPill = false;
         this.hasFungi = false;
+        Scanner scan = new Scanner(System.in);
+        this.scan = scan;
 
+    }
+    public void play(){
+        System.out.println("Chose your character!!");
+        System.out.println("***********************");
+
+        System.out.println("Enter your characters name: ");
+        String name = scan.nextLine();
+
+        this.name = name;
+    }
+
+    public String command(){
+        System.out.println("What do you want to do?");
+        System.out.println("***********************");
+        String command = "NOOO Fuck";
+
+        if(this.scan.hasNextLine()){
+            command = this.scan.nextLine();
+            
+        }
+        return command;
+
+            
+        
+        
     }
 
     /**
@@ -87,5 +115,9 @@ public class Character {
             fly = "cannot";
         }
         return this.name + " is " + this.size + " inches tall. " + this.name + " is located at coordinates (" + this.locationR +", " + this.locationC + ") on the map of Wonderland. Currently alice " + fly + " fly. According to the map: " + this.map[this.locationC][this.locationR];
+    }
+
+    public static void main(String[] args){
+
     }
 }
