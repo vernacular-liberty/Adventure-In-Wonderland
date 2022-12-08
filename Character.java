@@ -1,5 +1,6 @@
 //import
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
 
 public class Character {
     String[][] map = new String[5][5];
@@ -13,7 +14,8 @@ public class Character {
     double health;
     Boolean hasPill;
     Boolean hasFungi;
-    Bag bag;
+    ArrayList<String> bag;
+
 
      /**
      * Constructs a wonderland character.
@@ -29,7 +31,8 @@ public class Character {
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
         int s = ThreadLocalRandom.current().nextInt(36, 84 + 1);
-
+        ArrayList<String> bag = new ArrayList<String>(10);
+        this.bag = bag;
         this.name = n;
         this.size = s;
         this.originalSize = s;
@@ -40,8 +43,35 @@ public class Character {
         this.health = 50;
         this.hasPill = false;
         this.hasFungi = false;
-        this.bag = new Bag();
 
+    }
+
+    /**
+     * Picks up item to call examine and prevents movement
+     * @param command string describing the user action
+     */
+    public void grab(String command){
+        int openSpots = 0;
+
+        for(String item: bag){
+            if (item == null){
+                openSpots ++;
+            }
+        }
+        if (openSpots >= 1){
+
+            if (this.map[this.locationC][this.locationR].contains("pill")){
+                this.bag.add("pill");
+
+            } else if (this.map[this.locationC][this.locationR].contains("fungi")){
+                this.bag.add("fungi");
+
+            } else{
+                System.out.println("You cannot grab that item.");
+            }
+        } else {
+            System.out.println("You are out of space in your bag. Try using the drop function.");
+        }
     }
 
     /**
