@@ -8,14 +8,16 @@ public class RabbitHole {
     int numScone;
     String book;
     Character character;
-    Boolean hasKnife;
-    Boolean hasJam;
     Boolean readBook;
+    Boolean inBed;
+    int index;
+    Boolean changeFloor;
 
     public RabbitHole(Character character){
 
 		ArrayList<String> eventsL = new ArrayList<String>();
         eventsL.add("As you fall a table floats by. You peer over to see a gingham tabel cloth set with three cups of tea and a plate of scones. A small knife sticks out of a pot of jam.");
+        eventsL.add("A beautiful feather bed floats by you.");
         eventsL.add("You plop into an antique wingback chair and spin towards a desk with an open book.");
 
         this.events = eventsL;
@@ -23,9 +25,11 @@ public class RabbitHole {
         this.numScone = 5;
         this.book = "\"Welcolme to Wonderland!\"";
         this.character = character;
-        this.hasKnife = false;
-        this.hasJam = false;
         this.readBook = false;
+        this.inBed = false;
+        this.index = 0;
+        this.changeFloor = true;
+
     }
     
     /**
@@ -39,24 +43,18 @@ public class RabbitHole {
     System.out.println("The tunnel goes straight down towards the center of the earth. At first you fall quickly, but soon physics waines and you slow to a downward float.");
     System.out.println("Try a simple comand to interact with your surroundings. EX: read book");
 
-    int count = 7;
-    int index = 0;
-
     Scanner inputCommand = new Scanner(System.in);
-    while (this.readBook == false) {
-        count -= 1;
 
-        System.out.println(this.events.get(index));
+    while (this.readBook == false) {
+        while (this.changeFloor){
+            System.out.println(this.events.get(this.index));
+            this.changeFloor = false;
+
+        }
 
         //create scanner 
         String command = inputCommand.nextLine();
-        userAction(command, index);
-
-        //manage index of this.events
-        if (index == 0 && count == 2){
-            index += 1;
-
-        }
+        userAction(command);
      
     }
 
@@ -68,11 +66,9 @@ public class RabbitHole {
      * Based on command carries out function.
      * @param Command
      */
-    public void userAction(String command, int index){
-       
-        
-        if (command.contains("read") && this.events.get(index).contains("book")){
+    public void userAction(String command){
 
+        if (command.contains("read") && this.events.get(this.index).contains("book")){
             if (command.contains("book")){
                 System.out.println("You open the book, on the first page it says: " + this.book);
                 this.readBook = true;
@@ -83,7 +79,8 @@ public class RabbitHole {
             }
 
         } else if (command.contains("drink")){
-            if (command.contains("drink") && command.contains("tea") && this.events.get(index).contains("tea") && numTea >= 1 && this.character.health <= 95){
+            
+            if (command.contains("tea") && this.events.get(this.index).contains("tea") && numTea >= 1 && this.character.health <= 95){
                 this.character.health +=5;
                 this.numTea -= 1;
                 System.out.println(this.character.name + "'s health: " + this.character.health);
@@ -94,18 +91,39 @@ public class RabbitHole {
             }
 
         }else if(command.contains("take")){
-            if (command.contains("take") && command.contains("knife") && this.events.get(index).contains("knife")){
-                this.hasKnife = true;
-                System.out.println("You now have a knife. What doe you want to do with it?");
+            if (command.contains("knife") && this.events.get(this.index).contains("knife")){
+                this.character.bag.add("knife");
+                System.out.println("You now have a knife. What do you want to do with it?");
 
             } else {
                 System.out.println("What do you want to take?");
 
             }
 
-        }else if(command.contains("spread")  && this.events.get(index).contains(" jam")){
-            if (command.contains("jam") && this.hasKnife == true){
-                this.hasJam = true;
+        }else if (command.contains("get in")){
+           if (command.contains("bed") && this.events.get(this.index).contains("bed")){
+                this.inBed = true;
+                System.out.println("Maybe you should try to sleep before your journey...");
+
+            } else{
+                System.out.println("What do you want to get in?");
+
+            }
+
+        }else if (command.contains("sleep")){
+
+            if (this.character.health <= 90 && this.inBed){
+                this.character.health += 10;
+                this.character.toString();
+
+            } else {
+                System.out.println("You can't sleep there...");
+            }
+
+        }else if(command.contains("spread")  && this.events.get(this.index).contains(" jam")){
+
+            if (command.contains("jam") && this.character.bag.contains("knife")){
+                this.character.bag.add("jam");
                 System.out.println("Mmmm, what do you want to do now?");
 
             } else {
@@ -114,12 +132,12 @@ public class RabbitHole {
             }
         }else if (command.contains("eat")){
             if (command.contains("eat") && command.contains("scone")){
-                if(this.hasJam && this.character.health <= 92 && this.numScone >= 1){
+                if(this.character.bag.contains("jam") && this.character.health <= 92 && this.numScone >= 1){
                     this.character.health +=8;
                     this.numScone -= 1;
                     System.out.println(this.character.name + "'s health: " + this.character.health);
 
-                } else if (hasJam == false && this.character.health <= 95 && this.numScone >= 1){
+                } else if (this.character.health <= 95 && this.numScone >= 1){
                     this.character.health += 5;
                     System.out.println(this.character.name + "'s health: " + this.character.health);
 
@@ -128,6 +146,10 @@ public class RabbitHole {
 
                 }
             }
+        }else if(command.contains("down") && this.index < 2){
+            this.index += 1;
+            this.changeFloor = true;
+
         }else {
             System.out.println("I don't know that command yet.");
         }
