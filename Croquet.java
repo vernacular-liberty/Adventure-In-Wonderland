@@ -1,8 +1,14 @@
 //imports
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Croquet {
+    int health;
+    int size;
+    String flamingo;
+    String hedgehog;
+    int score;
     /**
      * Changes health status when user plays croquet based on size.
      * @return 
@@ -26,4 +32,15 @@ public class Croquet {
 
         return Arrays.asList(size, health);
     }
+    public Croquet(int score, String hedgehog, String flamingo){
+        System.out.println("The queen demands that you play a game of croquet with her. Answer yes or no.");
+        Scanner sc = new Scanner(System.in);
+        String response = sc.nextLine();
+        System.out.println(response + "Too bad! You play or you die!!"); 
+        sc.close();
+
+
+        
+    }
+
 }
