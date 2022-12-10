@@ -59,13 +59,12 @@ public class Character {
     }
 
     public String command(){
-        System.out.println("What do you want to do?");
         System.out.println("***********************");
-        String command = "NOOO Fuck";
+        String command = "Not command";
 
         if(this.scan.hasNextLine()){
             command = this.scan.nextLine();
-            
+
         }
         return command;
 

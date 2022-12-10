@@ -12,6 +12,10 @@ public class RabbitHole {
     int index;
     Boolean changeFloor;
 
+    /**
+     * Constructs rabbit hole.
+     * @param character the character playing the game
+     */
     public RabbitHole(Character character){
 
 		ArrayList<String> eventsL = new ArrayList<String>();
@@ -58,8 +62,8 @@ public class RabbitHole {
     }
 
     /**
-     * Finds Action key word and calls object
-     * @param Command String for user command
+     * Finds Action key word and calls object.
+     * @param Ccmmand String for user command
      */
     public void userAction(String command){
 
@@ -94,6 +98,10 @@ public class RabbitHole {
         
     }
 
+    /**
+     * Completes user action for take command.
+     * @param Ccmmand String for user command
+     */
     public void actionTake(String command){
         if (command.contains("knife") && this.events.get(this.index).contains("knife")){
             this.character.bag.add("knife");
@@ -105,6 +113,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes user action for spread command.
+     * @param command String for user command,
+     */
     public void actionSpread(String command){
         if (command.contains("jam") && this.character.bag.contains("knife")){
             this.character.bag.add("jam");
@@ -116,6 +128,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes user action for eat command.
+     * @param command String for user command.
+     */
     public void actionEat(String command){
         if(this.character.bag.contains("jam") && this.character.health <= 92 && this.numScone >= 1){
             this.character.health +=8;
@@ -132,6 +148,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes user action for drink command.
+     * @param command String for user command.
+     */
     public void actionDrink(String command){
         if (command.contains("tea") && this.events.get(this.index).contains("tea") && numTea >= 1 && this.character.health <= 95){
             this.character.health +=5;
@@ -144,6 +164,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes action for get in command.
+     * @param command String user command.
+     */
     public void actionGetIn(String command){
         if (command.contains("bed") && this.events.get(this.index).contains("bed")){
             this.inBed = true;
@@ -155,6 +179,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes user action for read command.
+     * @param command String for user command.
+     */
     public void actionRead(String command){
         if (command.contains("book")){
             System.out.println("You open the book, on the first page it says: " + this.book);
@@ -166,6 +194,10 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Completes uder action for sleep command.
+     * @param command String for user command.
+     */
     public void actionSleep(String command){
 
         if (this.character.health <= 90 && this.inBed){
