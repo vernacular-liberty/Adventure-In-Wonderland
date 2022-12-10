@@ -5,8 +5,8 @@
 An interactive choose your own adventure games based off Alice's Adventures in Wonderland by Lewis Carrol.
 
 # Contributors and Contributions
-Liberty Lehr: Wonderland, RabbitHole
+Liberty Lehr: Wonderland, RabbitHole, MarchManor, Character.
 
 Lily Garner:
 
-Nathalie Trouba:Croquet
+Nathalie Trouba: Croquet
