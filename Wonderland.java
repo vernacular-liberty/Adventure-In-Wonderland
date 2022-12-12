@@ -8,6 +8,7 @@ public class Wonderland{
     private RabbitHole rabbitHole;
     private MarchManor marchManor;
     private TugleyWoods tugleyWoods;
+    private Boolean changeLocation;
     Character character;
 
 
@@ -20,20 +21,134 @@ public class Wonderland{
         
         this.character = character;
         this.fungiForest = new FungiForest();
-        this.marchManor = new MarchManor();
         this.tugleyWoods = new TugleyWoods();
         this.rabbitHole = new RabbitHole(this.character);
+        this.changeLocation = true;
 
     }
 
     /**
      * Plays the rabbitHole sequence
      */
-    public void start(){
+    public void play(){
         this.character.play();
         this.rabbitHole.play();
+
+        System.out.println("The rabbit hole has dropped you in the middle of wonderland: ");
+
+        while (this.character.health >= 0) {
+            while (this.changeLocation){
+                System.out.println(this.map[this.character.locationC][this.character.locationR]);
+                investigate();
+                this.changeLocation = false;
+
+            }
+    
+            String command = this.character.command();
+            userAction(command);
+    
+        }
+    }
+
+    /**
+     * Finds key action words
+     * @param command
+     */
+    public void userAction(String command){
+        if (command.contains("walk")||command.contains("Walk")){
+            walkDirection(command);
+    
+        } else if(command.contains("fly")||command.contains("Fly")){
+            //Fly();
+        }
     }
     
+    /**
+     * Finds the direction the user wants to go.
+     * @param command
+     */
+    public void walkDirection(String command){
+        if (command.contains("north") || command.contains("North")){
+            walkNorth(command);
+
+        } else if (command.contains("south") || command.contains("South")){
+            walkSouth(command);
+
+        } else if(command.contains("west")||command.contains("West")){
+            walkWest(command);
+
+        } else if (command.contains("east")||command.contains("East")){
+            walkEast(command);
+
+        } else{
+            System.out.println("Please enter a valid direction: north, south, east or west.");
+
+        }
+    }
+
+    /**
+     * Moves up one column in the map. 
+     * @param command user command.
+     */
+    public void walkNorth(String command){
+        if (this.character.locationC == 0){
+            throw new RuntimeException("You have reached the North most edge of Wonderland. Please try a different direction.");
+
+        } else {
+            this.character.locationC-=1;
+            this.character.health -= 1;
+        }
+        
+    }
+
+    /**
+     * Moves down one one colomn in the map.
+     * @param command user command.
+     */
+    public void walkSouth(String command){
+        if (this.character.locationC == 5){
+            throw new RuntimeException("You have reached the North most edge of Wonderland. Please try a different direction.");
+
+        } else {
+            this.character.locationC+=1;
+            this.character.health -= 1;
+        }
+    }
+
+    /**
+     * Moves user one row to the left in the map.
+     * @param command user command.
+     */
+    public void walkWest(String command){
+        if (command.contains("west") || command.contains("West")){
+            if (this.character.locationR == 0){
+                throw new RuntimeException("You have reached the North most edge of Wonderland. Please try a different direction.");
+
+            } else {
+                this.character.locationR -= 1;
+                this.character.health -= 1;
+
+            }
+        }
+    }
+
+    /**
+     * Moves user one row to the right in the map.
+     * @param command user command.
+     */
+    public void walkEast(String command){
+        if (command.contains("east") || command.contains("East")){
+            if (this.character.locationR == 5){
+                throw new RuntimeException("You have reached the North most edge of Wonderland. Please try a different direction.");
+
+            } else {
+                this.character.locationR += 1;
+                this.character.health -= 1;
+
+            }
+        }
+    }
+
     public void investigate(){
         if (this.map[this.character.locationC][this.character.locationR].contains("pill")){
             System.out.println("You can use grab(\"pill\") to learn more.");
@@ -61,7 +176,8 @@ public class Wonderland{
             System.out.println("Tugley Woods");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("gabeled")){
-            this.marchManor.play();
+            MarchManor marchManor = new MarchManor(this.character);
+            marchManor.play();
             System.out.println("March Manor");
 
         }if (this.character.canFly && (this.map[this.character.locationC][this.character.locationR].contains("pill") || this.map[this.character.locationC][this.character.locationR].contains("fungi") 
@@ -72,23 +188,6 @@ public class Wonderland{
     
         }
     }
-
-    // public void promptEnterKey(){
-    //     Scanner readinput = new Scanner(System.in);
-
-    //     String enterkey = "Press \"ENTER\" to continue...";
-    //     System.out.print(enterkey);
-    
-    
-    //     enterkey = readinput.nextLine();
-    //      System.out.print(enterkey);
-    
-    //     if(enterkey.equals("")){
-    
-    //         System.out.println("It works!");
-    //     }
-    //     readinput.close();
-    //  }
 
     public String toString(){
         return "Character: " + this.character.health;
@@ -110,7 +209,12 @@ public class Wonderland{
             System.out.println("***********************");
             //wonderland.promptEnterKey();
 
-            wonderland.start();
+            wonderland.play();
+
+            while (character.health >= 0){
+                System.out.println("WHat direction do you want to go?");
+            }
+
         }
 
 
