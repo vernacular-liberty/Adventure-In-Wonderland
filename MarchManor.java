@@ -19,7 +19,7 @@ public class MarchManor {
         floors.add("Behind the door is a quaint room complete with a fireplace and a simple kitchen along the far wall. Strangely you cannot find a staircase, you swore it was a two story house when you entered.");
         floors.add("You enter a small attic bed room. On the desk sits a small blue bottle of pills.");
 
-        String kitchen = "On the kitchen counter is a decadant carrot cake, a fork and a bucket of water.";
+        String kitchen = "On the kitchen counter is a decadent carrot cake, a fork and a bucket of water.";
         String pill = "big";
 
         this.floors = floors;
@@ -173,7 +173,7 @@ public class MarchManor {
     public void actionFire(String command){
         if (this.character.bag.contains("bucket")){
             this.fire = false;
-            System.out.println("You look up the chimmney and see a narrow ladder.");
+            System.out.println("You look up the chimney and see a narrow ladder.");
 
         } else {
             System.out.println("You cannot put out the water because you do not have a bucket.");
