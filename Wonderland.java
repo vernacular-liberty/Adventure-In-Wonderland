@@ -6,7 +6,6 @@ public class Wonderland{
     //private Croquet croquet;
     private FungiForest fungiForest;
     private RabbitHole rabbitHole;
-    private MarchManor marchManor;
     private TugleyWoods tugleyWoods;
     private Boolean changeLocation;
     Character character;
@@ -36,7 +35,7 @@ public class Wonderland{
 
         System.out.println("The rabbit hole has dropped you in the middle of wonderland: ");
 
-        while (this.character.health >= 0) {
+        while (this.character.health >= 0 ) {
             while (this.changeLocation){
                 System.out.println(this.map[this.character.locationC][this.character.locationR]);
                 investigate();
@@ -47,7 +46,9 @@ public class Wonderland{
             String command = this.character.command();
             userAction(command);
     
-        }
+        } 
+
+        System.out.println("Oh no, you ran out of health points..... and died.......");
     }
 
     /**
@@ -212,7 +213,7 @@ public class Wonderland{
             wonderland.play();
 
             while (character.health >= 0){
-                System.out.println("WHat direction do you want to go?");
+                System.out.println("What direction do you want to go?");
             }
 
         }
