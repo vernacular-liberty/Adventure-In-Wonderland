@@ -1,10 +1,9 @@
 //imports
 import java.util.Random;
-import java.util.Scanner;
+
 // import java.util.ArrayList;
 
 public class Croquet {
-  
  
   int health;
   int size;
@@ -12,28 +11,14 @@ public class Croquet {
   String hedgehog;
   int score;
   Character character;
-  Scanner scan;
   Object distance;
 
   public Croquet(Character character) {
     this.character = character;
     this.score = 0;
-    Scanner scan = new Scanner(System.in);
-    this.scan = scan;
-  }
-
-  public String command() {
-    System.out.println("***********************");
-    String command = "Not command";
-
-    if (this.scan.hasNextLine()) {
-      command = this.scan.nextLine();
-
-    }
-   
-    return command;
 
   }
+
   /**
    * Randomly decides who will have the first turn
    * @param <Turn>
@@ -50,7 +35,6 @@ public class Croquet {
       System.out.println("ME FIRST!");
     }
   }
-  
 
   /**
    * Changes health status when user plays croquet based on size.
@@ -63,7 +47,7 @@ public class Croquet {
         System.out.println("The queen demands that you play a game of croquet with her. Answer yes or no.");
       
         // Read the user's input
-        String command = scan.nextLine();
+        String command = this.character.command();
       
         // Print a message to the console based on the user's response
         if (command.equalsIgnoreCase("yes")) {
@@ -83,12 +67,10 @@ public class Croquet {
         System.out.println("You are too small to be a player, so the Queen decided you would be more useful as a ball. After the game your health is: " + this.character.health + ".");
         break;
         
-
     } else if (size >= 100){
         this.character.health -= this.character.health / 8;
         System.out.println("You play a few games. Although, you could use a rest due to your massive size the physical excertion is now too taxing. After the game your health is: " + this.character.health + ".");
         
-
     } else {
         this.character.health -= this.character.health / 4;
         System.out.println("You play a few games to keep your head. After the games your health is: " + this.character.health + ".");
@@ -98,7 +80,7 @@ public class Croquet {
      
         // Prompt the player for a command
         System.out.println("Enter a command to play your turn (e.g. hit ball, move ball, etc.)");
-        String playerCommand = scan.nextLine();
+        String playerCommand = this.character.command();
 
         // Handle the player's turn
         if (playerCommand.equalsIgnoreCase("hit ball")) {
@@ -148,8 +130,8 @@ public class Croquet {
 }
     
 public static void main(String[] args) {
-    Croquet game = new Croquet(new Character());
+    Character c = new Character(1,1);
+    Croquet game = new Croquet(c);
     game.play();
   }
 }
-
