@@ -81,16 +81,6 @@ public class FungiForest {
         response.close();
     }
     
-
-    public void userAction(String command){
-        if((command.contains("goodbye") || command.contains("Goodbye"))){
-            inConversation = false;
-        }
-        else if(command.contains("chat")){
-            conversation();
-        }
-    }
-
     public static void main(String[] args){
         Character a = new Character( 1, 1);
         FungiForest m = new FungiForest(a);
