@@ -7,6 +7,6 @@ An interactive choose your own adventure games based off Alice's Adventures in W
 # Contributors and Contributions
 Liberty Lehr: Wonderland, RabbitHole, MarchManor, Character.
 
-Lily Garner:
+Lily Garner: TulgeyWoods, FungiForest
 
 Nathalie Trouba: Croquet
