@@ -119,7 +119,7 @@ public class Croquet {
         System.out.println("Your score: " + score);
 
         // End the game if the player reaches a certain score
-        if (score >= 100) {
+        if (score >= 50) {
           System.out.println("You win! Congratulations!");
           break;
         }
@@ -139,6 +139,11 @@ public class Croquet {
         System.out.println("The queen's score: " + score);
 
         // End the game if the queen reaches a certain score
+        if (score >= 50){
+            System.out.println("OFF WITH YOUR HEAD");
+            System.out.println("GAME OVER");
+            break;
+        }
     }
 }
     
@@ -147,3 +152,4 @@ public static void main(String[] args) {
     game.play();
   }
 }
+
