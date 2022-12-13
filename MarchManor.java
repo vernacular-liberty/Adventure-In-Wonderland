@@ -16,7 +16,7 @@ public class MarchManor {
     public MarchManor(Character character){
 
         ArrayList<String> floors = new ArrayList<String>();
-        floors.add("Behind the door is a quaint living room complete with a fire place and a simple kitchen along the far wall.");
+        floors.add("Behind the door is a quaint room complete with a fireplace and a simple kitchen along the far wall. Strangely you cannot find a staircase, you swore it was a two story house when you entered.");
         floors.add("You enter a small attic bed room. On the desk sits a small blue bottle of pills.");
 
         String kitchen = "On the kitchen counter is a decadant carrot cake, a fork and a bucket of water.";
@@ -138,13 +138,13 @@ public class MarchManor {
      */
     public void actionTake(String command){
 
-        if (command.contains("fork") == false && command.contains("pill") == false && command.contains("bucket") == false){
+        if (command.contains("fork") == false && command.contains("pill") == false && command.contains("bucket") == false && command.contains("water") == false){
             System.out.println("What are you attempting to take?");
 
         } else if (command.contains("fork") && this.inKitchen){
             this.character.bag.add("fork");
 
-        } else if (command.contains("bucket") && this.inKitchen){
+        } else if ((command.contains("bucket") || command.contains("water")) && this.inKitchen){
             this.character.bag.add("bucket");
 
         } else if (command.contains("pill") && this.floors.get(this.index).contains("pill")){
