@@ -2,12 +2,12 @@
 //https://bookroo.com/quotes/cheshire-cat
 
 //imports
-import java.util.ArrayList;
+// import java.util.ArrayList;
 //import java.util.Random;
 //import java.util.Scanner;
 
 public class TulgeyWoods{
-    ArrayList<String> areas;
+    // ArrayList<String> areas;
     int index;
     Character character;
     String lantern;
@@ -25,10 +25,10 @@ public class TulgeyWoods{
         this.lantern = "lantern";
         this.stick = "stick";
 
-        areas.add("After hours of wandering, you happen upon an abandoned shed in a small clearing.");
-        areas.add("After being without a path for hours, you wind up at a crossroads.");
-        areas.add("You decide to take the pink path. ");
-        areas.add("You decide to take the green path.");
+        // areas.add("After hours of wandering, you happen upon an abandoned shed in a small clearing.");
+        // areas.add("After being without a path for hours, you wind up at a crossroads.");
+        // areas.add("You decide to take the pink path. ");
+        // areas.add("You decide to take the green path.");
 
     }
 
@@ -48,7 +48,8 @@ public class TulgeyWoods{
         System.out.println("    \"It really doesn't matter.\"");
         System.out.println("    \"Then I guess it doesn't matter which way you go!\", exclaims the Cheshire Cat.");
 
-        System.out.print("You realize that the Cheshire Cat is right: It doesn't matter. You wander whichever way you please until you find the end of the woods.")
+        System.out.print("You realize that the Cheshire Cat is right: It doesn't matter. You wander whichever way you please until you find the end of the woods.");
+    }
 
         //Cheshire cat gives hint: if u have light, then go this way. If you have beef jerky, go that way. 
 
