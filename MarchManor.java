@@ -11,14 +11,16 @@ public class MarchManor {
     Boolean inKitchen;
     Boolean fire;
     Boolean inBed;
+    String pill;
 
     public MarchManor(Character character){
 
         ArrayList<String> floors = new ArrayList<String>();
         floors.add("Behind the door is a quaint living room complete with a fire place and a simple kitchen along the far wall.");
-        floors.add("You enter a small attic bed room. On the desk sits a small blue bottle.");
+        floors.add("You enter a small attic bed room. On the desk sits a small blue bottle of pills.");
 
         String kitchen = "On the kitchen counter is a decadant carrot cake, a fork and a bucket of water.";
+        String pill = "big";
 
         this.floors = floors;
         this.character = character;
@@ -29,6 +31,7 @@ public class MarchManor {
         this.inKitchen = false;
         this.fire = true;
         this.inBed = false;
+        this.pill = pill;
 
     }
 
@@ -54,6 +57,8 @@ public class MarchManor {
 
             }
 
+            System.out.println("You learned your less: do not go through other peoples things.");
+
         }
 
 
@@ -66,7 +71,7 @@ public class MarchManor {
             actionEnter();
 
         } else if (command.contains("investigate") || command.contains("check out") || command.contains("go to")){
-            actionInvestigate();
+            actionInvestigate(command);
 
         } else if (command.contains("take") || command.contains("grab")){
             actionTake(command);
@@ -77,7 +82,7 @@ public class MarchManor {
         } else if (command.contains("put out fire") || command.contains("use")){
             actionFire(command);
 
-        } else if (command.contains("climb")){
+        } else if (command.contains("climb") || command.contains("go down")){
             actionClimb(command);
 
         } else if (command.contains("get in")){
@@ -86,9 +91,13 @@ public class MarchManor {
         } else if (command.contains("sleep")){
             actionSleep(command);
 
-        } else if (command.contains("swallow") || (command.contains("take") && command.contains("pill"))){
+        } else if (command.contains("swallow") || command.contains("use")){
             actionPill(command);
+
+        } else if (command.contains("exit") || command.contains("go outside") || command.contains("use")){
+            actionExit(command);
         }
+
     }
 
     /**
@@ -99,15 +108,26 @@ public class MarchManor {
 
     }
 
+    public void actionExit(String command){
+        if (this.floors.get(this.index).contains("door") && command.contains("door")){
+            this.inHouse = false;
+
+        } else {
+            System.out.println("How are you trying to exit?");
+
+        }
+
+    }
+
     /**
      * If the user goes to the kitchen prints out kitchen description.
      */
-    public void actionInvestigate(){
-        if (this.floors.get(this.index).contains("kitchen")){
+    public void actionInvestigate(String command){
+        if (this.floors.get(this.index).contains("kitchen") && command.contains("kitchen")){
             this.inKitchen = true;
             System.out.println(this.kitchen);
 
-        } else if (this.floors.get(this.index).contains("fireplace")){
+        } else if (this.floors.get(this.index).contains("fireplace") && command.contains("fireplace")){
             System.out.println("The fire is burning hot.");
         }
     }
@@ -117,22 +137,21 @@ public class MarchManor {
      * @param command String for user command.
      */
     public void actionTake(String command){
-        if (this.inKitchen){
-            if (command.contains("fork")){
-                this.character.bag.add("fork");
 
-            }else if(command.contains("bucket")){
-                this.character.bag.add("bucket");
+        if (command.contains("fork") == false && command.contains("pill") == false && command.contains("bucket") == false){
+            System.out.println("What are you attempting to take?");
 
-            }
+        } else if (command.contains("fork") && this.inKitchen){
+            this.character.bag.add("fork");
 
-        } else if (this.floors.get(this.index).contains("pills")){
-            this.character.bag.add("pills");
+        } else if (command.contains("bucket") && this.inKitchen){
+            this.character.bag.add("bucket");
 
-        }else {
-            System.out.println("You are not in the kitchen.");
-
-        }
+        } else if (command.contains("pill") && this.floors.get(this.index).contains("pill")){
+            this.character.bag.add("pill");
+            System.out.println("Use the use or swallow command to take the pill.");
+             
+        } 
        
     }
 
@@ -163,9 +182,20 @@ public class MarchManor {
 
     public void actionClimb(String command){
         if (this.fire == false){
-            this.index += 1;
-            this.character.health -= 5;
-            this.newRoom = true;
+            if ( this.character.size <= 80){
+                if (this.index == 0){
+                    this.index += 1;
+                    this.character.health -= 5;
+
+                } else if (this.index == 1){
+                    this.index -= 1;
+                    this.character.health -= 5;
+                }
+                this.newRoom = true;
+
+            } else{
+                System.out.println("You are too big to go through the chimney.");
+            }
 
         } else{
             System.out.println("The fire is still burning!");
@@ -192,16 +222,27 @@ public class MarchManor {
     }
 
     public void actionPill(String command){
+
         if (command.contains("pill") && this.character.bag.contains("pill")){
-            this.character.size *=2;
-            System.out.println("You begin to grow and grow until you ");
+            if (this.pill == "small"){
+                this.character.size /=2;
+                System.out.println("You begin to shrink. Your size is now " + this.character.size + "inches tall.");
+                this.pill = "big";
+
+            } else if(this.pill == "big"){
+                this.character.size *=2;
+                System.out.println("You begin to grow and grow until you reach " + this.character.size + "inches tall.");
+                this.pill = "small";
+            }
+            this.character.bag.remove("pill");
 
         } else {
-            System.out.print("You may not have what you want to take.");
+            System.out.println("You may not have what you want to take.");
+        
+        }     
 
-        }
-
-    }
+    } 
+       
 
     public static void main(String[] args){
         Character a = new Character( 1, 1);
