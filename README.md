@@ -11,4 +11,4 @@ Lily Garner: TulgeyWoods, FungiForest
 
 Nathalie Trouba: Croquet
 
-For Phase 2 we updated a lot of our code and our game is now officially playable. More updates are to come, including edits to Croquet and implemtation of a Cheshire Cat throughout the game.
+For Phase 2 we updated a lot of our code and our game is now officially playable. More updates are to come, including edits to Croquet and implementation of a Cheshire Cat throughout the game.
