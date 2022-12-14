@@ -11,6 +11,7 @@ public class RabbitHole {
     Boolean inBed;
     int index;
     Boolean changeFloor;
+    Boolean spreadJam;
 
     /**
      * Constructs rabbit hole.
@@ -32,6 +33,7 @@ public class RabbitHole {
         this.inBed = false;
         this.index = 0;
         this.changeFloor = true;
+        this.spreadJam = false;
 
     }
     
@@ -92,6 +94,9 @@ public class RabbitHole {
             this.index += 1;
             this.changeFloor = true;
 
+        } else if (command.contains("check")){
+            actionCheck(command);
+
         } else {
             System.out.println("I don't know that command yet.");
         }
@@ -119,7 +124,7 @@ public class RabbitHole {
      */
     public void actionSpread(String command){
         if (command.contains("jam") && this.character.bag.contains("knife")){
-            this.character.bag.add("jam");
+            this.spreadJam = true;
             System.out.println("Mmmm, what do you want to do now?");
             
         } else {
@@ -133,16 +138,21 @@ public class RabbitHole {
      * @param command String for user command.
      */
     public void actionEat(String command){
-        if(this.character.bag.contains("jam") && this.character.health <= 92 && this.numScone >= 1){
+        if(this.spreadJam && this.character.health <= 92 && this.numScone >= 1){
             this.character.health +=8;
             this.numScone -= 1;
-            System.out.println(this.character.name + "'s health: " + this.character.health);
+
+        } else if(this.spreadJam && this.character.health > 92 && this.numScone >= 1){
+            this.character.health = 100;
+            this.numScone -= 1;
 
         } else if (this.character.health <= 95 && this.numScone >= 1){
             this.character.health += 5;
-            System.out.println(this.character.name + "'s health: " + this.character.health);
 
-        } else {
+        } else if (this.character.health > 95 && this.numScone >= 1){
+            this.character.health += 5;
+
+        }else {
             System.out.println("What do you want to eat?");
 
         }
@@ -156,7 +166,6 @@ public class RabbitHole {
         if (command.contains("tea") && this.events.get(this.index).contains("tea") && numTea >= 1 && this.character.health <= 95){
             this.character.health +=5;
             this.numTea -= 1;
-            System.out.println(this.character.name + "'s health: " + this.character.health);
 
         } else {
             System.out.println("What do you want to drink?");
@@ -202,15 +211,26 @@ public class RabbitHole {
 
         if (this.character.health <= 90 && this.inBed){
             this.character.health += 10;
-            this.character.toString();
+            System.out.print("💤💤💤");
 
+        } else if (this.character.health > 90){
+            this.character.health = 100;
+            
         } else {
             System.out.println("You can't sleep there...");
 
         }
 
+    }    
+
+    public void actionCheck(String command){
+        if (command.contains("inventory")){
+            this.character.inventoryToString();
+
+        } else if (command.contains("health")){
+            this.character.healthToString();
+        }
     }
-    
 
     public static void main(String[] args){
         Character a = new Character( 1, 1);

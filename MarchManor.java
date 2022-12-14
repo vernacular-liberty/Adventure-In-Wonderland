@@ -96,6 +96,12 @@ public class MarchManor {
 
         } else if (command.contains("exit") || command.contains("go outside") || command.contains("use")){
             actionExit(command);
+
+        } else if (command.contains("check")){
+            this.character.inventoryToString();
+            
+        } else {
+            System.out.println("I don't know that command yet.");
         }
 
     }
@@ -243,7 +249,15 @@ public class MarchManor {
 
     } 
        
+    public void actionCheck(String command){
+        if (command.contains("inventory")){
+            this.character.inventoryToString();
 
+        } else if (command.contains("health")){
+            this.character.healthToString();
+        }
+    }
+    
     public static void main(String[] args){
         Character a = new Character( 1, 1);
         MarchManor m = new MarchManor(a);
