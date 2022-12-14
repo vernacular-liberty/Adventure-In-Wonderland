@@ -1,19 +1,17 @@
-//https://disney.fandom.com/wiki/Cheshire_Cat
-//https://bookroo.com/quotes/cheshire-cat
-
 //imports
 // import java.util.ArrayList;
 //import java.util.Random;
 //import java.util.Scanner;
 
+//Introduces Cheshire Cat
 public class TulgeyWoods{
     // ArrayList<String> areas;
     int index;
     Character character;
-    String lantern;
+    // String lantern;
     Boolean inForest;
     Boolean newArea;
-    String stick;
+    // String stick;
 
     /**
      * Constructs Tulgey Woods.
@@ -22,8 +20,8 @@ public class TulgeyWoods{
     public TulgeyWoods(Character character){
         this.index = 0;
         this.character = character;
-        this.lantern = "lantern";
-        this.stick = "stick";
+        // this.lantern = "lantern";
+        // this.stick = "stick";
 
         // areas.add("After hours of wandering, you happen upon an abandoned shed in a small clearing.");
         // areas.add("After being without a path for hours, you wind up at a crossroads.");
@@ -39,7 +37,7 @@ public class TulgeyWoods{
     public void play(){
         System.out.println("After hours of wandering, you wind up at a crossroads.");
         System.out.println("Suddenly, you hear laughter coming from above. A striped cat appears in front of you, seemingly out of thin air.");
-        System.out.println("This is the Cheshire Cat. He grins from ear to ear, and he speaks in a sing-songy voice.");
+        System.out.println("This is the Cheshire Cat. He grins from ear to ear, and he speaks in a sing-song voice.");
         System.out.println("[FUN FACT: The Cheshire Cat is well-known around here. Even the Queen is scared of him!]");
         System.out.println("Maybe the Cheshire Cat knows the way out of here!");
         System.out.println("    \"What have I found here?\", asks the Cheshire Cat.");
@@ -50,8 +48,6 @@ public class TulgeyWoods{
 
         System.out.print("You realize that the Cheshire Cat is right: It doesn't matter. You wander whichever way you please until you find the end of the woods.");
     }
-
-        //Cheshire cat gives hint: if u have light, then go this way. If you have beef jerky, go that way. 
 
         //System.out.println("Type \"enter\" if you want to enter the forest.");
 
@@ -75,15 +71,6 @@ public class TulgeyWoods{
     //         System.out.println("Where did the Cheshire Cat come from? And why is his smile so wide?");
     //     }
 
-    // }
-
-    // public void conversation(){
-    //     System.out.println("In the distance, you see ");
-        
-    //     System.out.println("Oh my! What have we here?");
-    //     System.out.print("[FUN FACT: The Cheshire Cat is well-known around here. Even the Queen is scared of him!]");
-    //     System.out.println("He is grinning ear to ear.");
-    //     System.out.println("");
     // }
 
     // public void userAction(String command){

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
+//Introduces CATERPILLAR
 public class FungiForest {
     
     Character character;
@@ -18,6 +19,10 @@ public class FungiForest {
         this.inConversation =true;
     }
 
+    /**
+     * Constructs Fungi Forest.
+     * @param character the character playing the game
+     */
     public void conversation(){
         System.out.println();
 
@@ -58,7 +63,7 @@ public class FungiForest {
                 else{ 
                     //generates caterpillar's response
                     for (int i=0; i < words.length; i++) {
-                        if(words[i].equals("I") || words[i].equals("i")){
+                        if(words[i].equals("I") || words[i].equals("i") || (words[i].equals("I"))){ //maybe also me
                             character.health-=2.5;
                             bot_response = "CATERPILLAR: You! Who are you!?";
                             break;
@@ -72,6 +77,7 @@ public class FungiForest {
                 }
             }
             System.out.println(bot_response);
+            System.out.println("[WARNING] health: " + character.health); //maybe make this red
         }
 
         System.out.println();
