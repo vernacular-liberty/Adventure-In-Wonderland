@@ -4,11 +4,14 @@
 
 An interactive choose your own adventure games based off Alice's Adventures in Wonderland by Lewis Carrol.
 
+# Game Updates
+For phase one the classes and functions are roughly mapped.
+
+For Phase 2 we updated a lot of our code and our game is now officially playable. More updates are to come, including edits to Croquet and implementation of a Cheshire Cat throughout the game.
+
 # Contributors and Contributions
 Liberty Lehr: Wonderland, RabbitHole, MarchManor, Character.
 
 Lily Garner: TulgeyWoods, FungiForest
 
 Nathalie Trouba: Croquet
-
-For Phase 2 we updated a lot of our code and our game is now officially playable. More updates are to come, including edits to Croquet and implementation of a Cheshire Cat throughout the game.
