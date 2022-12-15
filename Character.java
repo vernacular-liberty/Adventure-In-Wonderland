@@ -32,7 +32,6 @@ public class Character{
     Scanner scan;
     Boolean canSleep;
 
-
      /**
      * Constructs a wonderland character.
      * @param name string that stores the characters name.
@@ -66,10 +65,10 @@ public class Character{
      * Runs the play loop for character
      */
     public void play(){
-        System.out.println("Chose your character!!");
-        System.out.println("***********************");
+        printSlow("Chose your character!!");
+        printSlow("***********************");
 
-        System.out.println("Enter your characters name: ");
+        printSlow("Enter your characters name: ");
         String name = scan.nextLine();
 
         this.name = name;
@@ -81,7 +80,7 @@ public class Character{
      * @return command that the user inputted
      */
     public String command(){
-        System.out.println("***********************");
+        printSlow("***********************");
         String command = "Not command";
 
         if(this.scan.hasNextLine()){
@@ -90,6 +89,31 @@ public class Character{
         }
         return command;
 
+    }
+
+    /**
+     * Prints statements our slowly
+     */
+    public void printSlow(String text){
+        try {
+
+            char[] textArray = text. toCharArray();
+
+            for (int i = 0; i < textArray.length; i++) {
+                //Pause for 4 seconds
+                Thread.sleep(30);
+                //Print a message
+                if (i < textArray.length-1){
+                    System.out.print(textArray[i]);
+
+                } else {
+                    System.out.println(textArray[i]);
+
+                }
+            }
+        } catch (Exception e){
+
+        }
     }
 
     /**
@@ -113,10 +137,10 @@ public class Character{
                 this.bag.add("fungi");
 
             } else{
-                System.out.println("You cannot grab that item.");
+                printSlow("You cannot grab that item.");
             }
         } else {
-            System.out.println("You are out of space in your bag. Try using the drop function.");
+           printSlow("You are out of space in your bag. Try using the drop function.");
         }
     }
 
@@ -167,13 +191,13 @@ public class Character{
 
         if (this.health <= 90 && this.canSleep){
             this.health += 10;
-            System.out.print("💤💤💤");
+            printSlow("💤💤💤");
 
         } else if (this.health > 90){
             this.health = 100;
             
         } else {
-            System.out.println("You have to be in bed to sleep silly. ");
+            printSlow("You have to be in bed to sleep silly. ");
 
         }
 
@@ -186,10 +210,10 @@ public class Character{
     public void actionGetIn(String command, String place){
         if (command.contains("bed") && place.contains("bed")){
             this.canSleep = true;
-            System.out.println("Maybe you should try to sleep before your journey...");
+            printSlow("Maybe you should try to sleep before your journey...");
 
         } else{
-            System.out.println("What do you want to get in?");
+            printSlow("What do you want to get in?");
 
         }
     }
@@ -200,17 +224,17 @@ public class Character{
     public void inventoryToString(){
         int count = 0;
 
-        System.out.println("***********************");
-        System.out.println("Inventory: ");
+        printSlow("***********************");
+        printSlow("Inventory: ");
 
         for (String item : this.bag){
-            System.out.println("- " + item);
+            printSlow("- " + item);
             count+=1;
         }
 
         int spaceLeft = 10 - count;
 
-        System.out.println("Spaces left: " + spaceLeft);
+        printSlow("Spaces left: " + spaceLeft);
 
     }
 
@@ -220,13 +244,13 @@ public class Character{
     public void healthToString(){
 
         if (this.health>= 80){
-            System.out.println(this.name + "'s health is: " + this.health + " 🔋 ");
+            printSlow(this.name + "'s health is: " + this.health + " 🔋 ");
 
         } else if (this.health <= 20){
-            System.out.println(this.name + "'s health is: " + this.health + " 🪫 ");
+            printSlow(this.name + "'s health is: " + this.health + " 🪫 ");
 
         } else {
-            System.out.println(this.name + "'s health is: " + this.health);
+            printSlow(this.name + "'s health is: " + this.health);
 
         }
     }

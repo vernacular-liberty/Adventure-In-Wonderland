@@ -51,16 +51,18 @@ public class RabbitHole {
      * Runs rabbit hole game loop.
      */
     public void play(){
-        System.out.println("In an effort to avoid the plague of daily life you decide to take a walk by the pond. To your surprise you see a white rabbit reach into his waist coat pocket and pull out a pocket watch.");
-        System.out.println("    \"Excuse me Mr. Rabbit, may I ask...\", you call in confusion.");
-        System.out.println("    \"Can you not see I'm late!\", the rabbit proclaims as he hops away. A rabbit who talks, bizarre, you must go after him!");
-        System.out.println("    \" Wait for me Mr. Rabbit\", you call out as you chase him through the woods. As you round a bend you see the tip of his white tail disappear into a hole beneath some gnarly tree roots. Consumed by curiosity you go after him head first down the rabbit hole.");
-        System.out.println("The tunnel goes straight down towards the center of the earth. At first you fall quickly, but soon physics wanes and you slow to a downward float.");
-        System.out.println("Try a simple command to interact with your surroundings. EX: read book");
+        this.character.printSlow("In an effort to avoid the plague of daily life you decide to take a walk by the pond. To your surprise you see a white rabbit reach into his waist coat pocket and pull out a pocket watch.");
+        this.character.printSlow("    \"Excuse me Mr. Rabbit, may I ask...\", you call in confusion.");
+        this.character.printSlow("    \"Can you not see I'm late!\", the rabbit proclaims as he hops away. A rabbit who talks, bizarre, you must go after him!");
+        this.character.printSlow("    \"Wait for me Mr. Rabbit\", you call out as you chase him through the woods. As you round a bend you see the tip of his white tail disappear into a hole beneath some gnarly tree roots. Consumed by curiosity you go after him head first down the rabbit hole.");
+        this.character.printSlow("The tunnel goes straight down towards the center of the earth. At first you fall quickly, but soon physics wanes and you slow to a downward float.");
+        this.character.printSlow(" ");
+        this.character.printSlow("Try a simple command to interact with your surroundings. EX: read book");
+        this.character.printSlow(" ");
 
         while (this.readBook == false) {
             while (this.changeFloor){
-                System.out.println(this.events.get(this.index));
+                this.character.printSlow(this.events.get(this.index));
                 this.changeFloor = false;
 
             }
@@ -113,7 +115,7 @@ public class RabbitHole {
             actionClue();
 
         }else {
-            System.out.println("I don't know that command yet.");
+            this.character.printSlow("I don't know that command yet.");
 
         }
         
@@ -126,15 +128,15 @@ public class RabbitHole {
     public void actionTake(String command){
         if (command.contains("knife") && this.events.get(this.index).contains("knife")){
             this.character.bag.add("knife");
-            System.out.println("You now have a knife. What do you want to do with it?");
+            this.character.printSlow("You now have a knife. What do you want to do with it?");
     
         } else if (command.contains("scone") && this.events.get(this.index).contains("scone") && this.numScone>=1){
             this.character.bag.add("scone");
             this.numScone-=1;
-            System.out.println("You now have a scone. What do you want to do with it?");
+            this.character.printSlow("You now have a scone. What do you want to do with it?");
 
         }else {
-            System.out.println("What do you want to take?");
+            this.character.printSlow("What do you want to take?");
     
         }
     }
@@ -146,10 +148,10 @@ public class RabbitHole {
     public void actionSpread(String command){
         if (command.contains("jam") && this.character.bag.contains("knife")){
             this.hasJam = true;
-            System.out.println("Mmmm, what do you want to do now?");
+            this.character.printSlow("Mmmm, what do you want to do now?");
             
         } else {
-            System.out.println("What do you want to spread? Do you need a knife?");
+            this.character.printSlow("What do you want to spread? Do you need a knife?");
         
         }
     }
@@ -190,12 +192,12 @@ public class RabbitHole {
 
 
             } else {
-                System.out.println("You do not have a scone in your inventory.");
+                this.character.printSlow("You do not have a scone in your inventory.");
 
             }
 
         } else {
-            System.out.println("What do you want to eat?");
+            this.character.printSlow("What do you want to eat?");
 
         }
     }
@@ -212,7 +214,7 @@ public class RabbitHole {
             this.numTea -= 1;
 
         } else {
-            System.out.println("What do you want to drink?");
+            this.character.printSlow("What do you want to drink?");
 
         }
     }
@@ -223,11 +225,11 @@ public class RabbitHole {
      */
     public void actionRead(String command){
         if (command.contains("book")){
-            System.out.println("You open the book, on the first page it says: " + this.book);
+            this.character.printSlow("You open the book, on the first page it says: " + this.book);
             this.readBook = true;
 
         } else {
-            System.out.println("What do you want to read?");
+            this.character.printSlow("What do you want to read?");
 
         }
     }    
@@ -248,14 +250,14 @@ public class RabbitHole {
     }
 
     public void actionClue(){
-        System.out.println("+--------------------------------+");
-        System.out.println("|   Some Commands to try:        |");
-        System.out.println("|   - 'take'                     |");
-        System.out.println("|   - 'drop'                     |");
-        System.out.println("|   - 'sleep'                    |");
-        System.out.println("|   - 'eat'                      |");
-        System.out.println("|   - 'spread'                   |");
-        System.out.println("+--------------------------------+");
+        this.character.printSlow("+--------------------------------+");
+        this.character.printSlow("|   Some Commands to try:        |");
+        this.character.printSlow("|   - 'take'                     |");
+        this.character.printSlow("|   - 'drop'                     |");
+        this.character.printSlow("|   - 'sleep'                    |");
+        this.character.printSlow("|   - 'eat'                      |");
+        this.character.printSlow("|   - 'spread'                   |");
+        this.character.printSlow("+--------------------------------+");
 
     }
 

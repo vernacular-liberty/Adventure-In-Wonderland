@@ -36,11 +36,11 @@ public class Wonderland extends Thread{
         this.character.play();
         this.rabbitHole.play();
 
-        System.out.println("The rabbit hole has dropped you in the middle of wonderland: ");
+        printSlow("The rabbit hole has dropped you in the middle of wonderland: ");
 
         while (this.character.health >= 0 ) {
             while (this.changeLocation){
-                System.out.println(this.map[this.character.locationC][this.character.locationR]);
+                printSlow(this.map[this.character.locationC][this.character.locationR]);
                 investigate();
                 this.changeLocation = false;
 
@@ -51,7 +51,7 @@ public class Wonderland extends Thread{
     
         } 
 
-        System.out.println("Oh no, you ran out of health points..... and died....... ☠️☠️☠️");
+        printSlow("Oh no, you ran out of health points..... and died....... ☠️☠️☠️");
     }
 
     /**
@@ -120,7 +120,7 @@ public class Wonderland extends Thread{
             walkEast(command);
 
         } else{
-            System.out.println("Please enter a valid direction: north, south, east or west.");
+            printSlow("Please enter a valid direction: north, south, east or west.");
 
         }
     }
@@ -190,40 +190,36 @@ public class Wonderland extends Thread{
 
     public void investigate(){
         if (this.map[this.character.locationC][this.character.locationR].contains("pill")){
-            System.out.println("You can use grab(\"pill\") to learn more.");
+            printSlow("You can use grab(\"pill\") to learn more.");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("fungi")){
-            System.out.println("You can use grab(\"fungi\") to learn more.");
+            printSlow("You can use grab(\"fungi\") to learn more.");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("water")){
-            System.out.println("You can use use(\"water\") to learn more.");
+            printSlow("You can use use(\"water\") to learn more.");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("door")){
-            System.out.println("You can use use(\"door\") to learn more.");    
+            printSlow("You can use use(\"door\") to learn more.");    
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("croquet")){
             Croquet croquet = new Croquet(this.character);
-            System.out.println("Play Croquet");
             croquet.play();
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
             this.fungiForest.conversation();
-            System.out.println("Caterpillar Conversation");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("Tugley woods")){
             this.tulgeyWoods.play();
-            System.out.println("Tugley Woods");
 
-        } if (this.map[this.character.locationC][this.character.locationR].contains("gabeled")){
+        } if (this.map[this.character.locationC][this.character.locationR].contains("gabled")){
             MarchManor marchManor = new MarchManor(this.character);
             marchManor.play();
-            System.out.println("March Manor");
 
         }if (this.character.canFly && (this.map[this.character.locationC][this.character.locationR].contains("pill") || this.map[this.character.locationC][this.character.locationR].contains("fungi") 
         || this.map[this.character.locationC][this.character.locationR].contains("water") || this.map[this.character.locationC][this.character.locationR].contains("door") 
         || this.map[this.character.locationC][this.character.locationR].contains("croquet") || this.map[this.character.locationC][this.character.locationR].contains("caterpillar"))){
           
-            System.out.println("Note: If you grab an item you will lose the ability to fly.");
+            printSlow("Note: If you grab an item you will lose the ability to fly.");
     
         }
     }

@@ -56,7 +56,7 @@ public class MarchManor {
      * Game loop for the manor class
      */
     public void play(){
-        System.out.println("Type \"enter\" if you want to go into the house.");
+        this.character.printSlow("Type \"enter\" if you want to go into the house.");
 
         String start = this.character.command();
         userAction(start);
@@ -77,7 +77,7 @@ public class MarchManor {
 
             }
 
-            System.out.println("You learned your less: do not go through other peoples things.");
+            this.character.printSlow("You learned your less: do not go through other peoples things.");
 
         }
 
@@ -127,7 +127,7 @@ public class MarchManor {
         } else if (command.contains("clue")){
             printCommand();
         }else {
-            System.out.println("I don't know that command yet.");
+            this.character.printSlow("I don't know that command yet.");
         }
 
     }
@@ -149,7 +149,7 @@ public class MarchManor {
             this.inHouse = false;
 
         } else {
-            System.out.println("How are you trying to exit?");
+            this.character.printSlow("How are you trying to exit?");
 
         }
 
@@ -162,10 +162,10 @@ public class MarchManor {
     public void actionInvestigate(String command){
         if (this.floors.get(this.index).contains("kitchen") && command.contains("kitchen")){
             this.inKitchen = true;
-            System.out.println(this.kitchen);
+            this.character.printSlow(this.kitchen);
 
         } else if (this.floors.get(this.index).contains("fireplace") && command.contains("fireplace")){
-            System.out.println("The fire is burning hot.");
+            this.character.printSlow("The fire is burning hot.");
         }
     }
 
@@ -176,7 +176,7 @@ public class MarchManor {
     public void actionTake(String command){
 
         if (command.contains("fork") == false && command.contains("pill") == false && command.contains("bucket") == false && command.contains("water") == false){
-            System.out.println("What are you attempting to take?");
+            this.character.printSlow("What are you attempting to take?");
 
         } else if (command.contains("fork") && this.inKitchen){
             this.character.bag.add("fork");
@@ -186,7 +186,7 @@ public class MarchManor {
 
         } else if (command.contains("pill") && this.floors.get(this.index).contains("pill")){
             this.character.bag.add("pill");
-            System.out.println("Use the use or swallow command to take the pill.");
+            this.character.printSlow("Use the use or swallow command to take the pill.");
              
         } 
        
@@ -205,12 +205,12 @@ public class MarchManor {
                 } else{
                     this.character.health = 100;
                 }
-                System.out.println(this.character.name +"'s health is "+ this.character.health);
+                this.character.printSlow(this.character.name +"'s health is "+ this.character.health);
 
             }
 
         } else {
-            System.out.println("What do you want to eat?");
+            this.character.printSlow("What do you want to eat?");
         }
     }
 
@@ -221,10 +221,10 @@ public class MarchManor {
     public void actionFire(String command){
         if (this.character.bag.contains("bucket")){
             this.fire = false;
-            System.out.println("You look up the chimney and see a narrow ladder.");
+            this.character.printSlow("You look up the chimney and see a narrow ladder.");
 
         } else {
-            System.out.println("You cannot put out the fire because you do not have a bucket.");
+            this.character.printSlow("You cannot put out the fire because you do not have a bucket.");
         }
     }
 
@@ -246,11 +246,12 @@ public class MarchManor {
                 this.newRoom = true;
 
             } else{
-                System.out.println("You are too big to go through the chimney.");
+                this.character.printSlow("You are too big to go through the chimney.");
+
             }
 
         } else{
-            System.out.println("The fire is still burning!");
+            this.character.printSlow("The fire is still burning!");
 
         }
     }
@@ -264,18 +265,18 @@ public class MarchManor {
         if (command.contains("pill") && this.character.bag.contains("pill")){
             if (this.pill == "small"){
                 this.character.size /=2;
-                System.out.println("You begin to shrink. Your size is now " + this.character.size + "inches tall.");
+                this.character.printSlow("You begin to shrink. Your size is now " + this.character.size + "inches tall.");
                 this.pill = "big";
 
             } else if(this.pill == "big"){
                 this.character.size *=2;
-                System.out.println("You begin to grow and grow until you reach " + this.character.size + "inches tall.");
+                this.character.printSlow("You begin to grow and grow until you reach " + this.character.size + "inches tall.");
                 this.pill = "small";
             }
             this.character.bag.remove("pill");
 
         } else {
-            System.out.println("You may not have what you want to take.");
+            this.character.printSlow("You may not have what you want to take.");
         
         }     
 
@@ -295,13 +296,13 @@ public class MarchManor {
     }
 
     public void printCommand(){
-        System.out.println("+--------------------------------+");
-        System.out.println("|   Some Commands to try:        |");
-        System.out.println("|   - 'take'                     |");
-        System.out.println("|   - 'drop'                     |");
-        System.out.println("|   - 'sleep'                    |");
-        System.out.println("|   - 'swallow'                  |");
-        System.out.println("+--------------------------------+");
+        this.character.printSlow("+--------------------------------+");
+        this.character.printSlow("|   Some Commands to try:        |");
+        this.character.printSlow("|   - 'take'                     |");
+        this.character.printSlow("|   - 'drop'                     |");
+        this.character.printSlow("|   - 'sleep'                    |");
+        this.character.printSlow("|   - 'swallow'                  |");
+        this.character.printSlow("+--------------------------------+");
 
     }
 
