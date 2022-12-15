@@ -1,7 +1,8 @@
 //imports
 import java.util.Random;
+import java.lang.Thread;
 
-public class Wonderland{
+public class Wonderland extends Thread{
     String[][] map = new String[5][5];
     //private Croquet croquet;
     private FungiForest fungiForest;
@@ -11,13 +12,15 @@ public class Wonderland{
     Character character;
 
 
-    public Wonderland(Character character){
+    public Wonderland(){
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long trek through the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
         {"You have entered the croquet grounds. An intense game is taking place between Tweedledee and Tweedledum.","You have reached the grandest Castle in all the land, the castle of the queen of hearts.", "Court House", "You have reached the royal rose gardens.", "You are at the base of the mountains of division."}, 
         {"You have reached the Mad Hatters house. It appear there is a tea party in session!", "You have reached the duchesses manner.", "You emerge from the woods into a meadow surrounding a small gabled house. You enter the house on the table is a container of pills.", "You enter a grove of massive mushrooms. Your eyes meet those of caterpillar who ignores you and takes a drag of a long hookah.", "Chilled to the bone you hurry on through the woods in the hopes of finding shelter."}, 
         {"Welcome to the dismal mire...","You found a river. Should you drink the water? It could be dangerous...Strange things happen in Wonderland...", "Giant dragonflies swarm through the sky over your head squabbling over potential perches.","The trees around you begin to morph into oversized mushrooms. You are pleased pick some fungi and arrange them into a bouquet. Your stomach growls...", "You sense someone is watching you in the darkness! Move faster"}, 
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
+        Random random = new Random();
+        Character character = new Character(random.nextInt(5), random.nextInt(5));
         this.character = character;
         this.fungiForest = new FungiForest(this.character);
         this.tulgeyWoods = new TulgeyWoods(this.character);
@@ -49,6 +52,31 @@ public class Wonderland{
         } 
 
         System.out.println("Oh no, you ran out of health points..... and died....... ☠️☠️☠️");
+    }
+
+    /**
+     * @param text
+     */
+    public void printSlow(String text){
+        try {
+
+            char[] textArray = text. toCharArray();
+
+            for (int i = 0; i < textArray.length; i++) {
+                //Pause for 4 seconds
+                Thread.sleep(30);
+                //Print a message
+                if (i < textArray.length-1){
+                    System.out.print(textArray[i]);
+
+                } else {
+                    System.out.println(textArray[i]);
+
+                }
+            }
+        } catch (Exception e){
+
+        }
     }
 
 
@@ -209,25 +237,22 @@ public class Wonderland{
     }
 
     public static void main(String[] args){
+        Wonderland wonderland = new Wonderland();
 
-        System.out.println("Welcome to your adventure in wonderland!");
+        wonderland.printSlow("Welcome to your adventure in wonderland!");
 
         //game loop
         boolean runGame = true;
 
         while (runGame == true){
-            Random random = new Random();
-            Character character = new Character(random.nextInt(5), random.nextInt(5));
-
-            Wonderland wonderland = new Wonderland(character);
-
-            System.out.println("***********************");
+        
+            wonderland.printSlow("***********************");
             //wonderland.promptEnterKey();
 
             wonderland.play();
 
-            while (character.health >= 0){
-                System.out.println("What direction do you want to go?");
+            while (wonderland.character.health >= 0){
+                wonderland.printSlow("What direction do you want to go?");
             }
 
         }
