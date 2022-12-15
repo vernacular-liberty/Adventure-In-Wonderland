@@ -6,6 +6,6 @@ The gameplay is fairly simple. (If you have ever played Zork, then this style wi
 
 It is meant to be a bit of a guessing game, which is why there is no penalty for being wrong or getting stuck. If nothing happens when you enter a command, you can re-try as many times as you like. Look for hints in the prompts and make sure you spell everything correctly.
 
-The game ends if your health drops below 0. 
+Beware, the game ends if your health drops below 0. 
 
 
