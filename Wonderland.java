@@ -48,8 +48,9 @@ public class Wonderland{
     
         } 
 
-        System.out.println("Oh no, you ran out of health points..... and died.......");
+        System.out.println("Oh no, you ran out of health points..... and died....... ☠️☠️☠️");
     }
+
 
     /**
      * Finds key action words
@@ -61,7 +62,16 @@ public class Wonderland{
     
         } else if(command.contains("fly")||command.contains("Fly")){
             //Fly();
-        }
+        } else if (command.contains("drop")){
+            this.character.drop(command);
+
+        } else if (command.contains("take")||command.contains("grab")){
+            this.character.drop(command);
+
+        } else if (command.contains("sleep")){
+            this.character.actionSleep();
+
+        } 
     }
     
     /**
@@ -188,6 +198,10 @@ public class Wonderland{
             System.out.println("Note: If you grab an item you will lose the ability to fly.");
     
         }
+    }
+
+    public void printStatement(String statement){
+
     }
 
     public String toString(){

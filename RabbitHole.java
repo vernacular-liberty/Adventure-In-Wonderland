@@ -1,6 +1,18 @@
 //import
 import java.util.ArrayList;
 
+/**
+ * Represents the rabbit hole 
+ * @param events array list for the different events as you fall down the rabbit hole.
+ * @param numTea int for the number of cups of tea 
+ * @param numScone int for the number of scones
+ * @param book string for first page of the book
+ * @param character Character representing the user
+ * @param readBook Boolean for whether the book has been read
+ * @param index int for the current index in events
+ * @param changeFloor boolean for whether the floor changed 
+ * @param spreadJam whether jam was spread
+ */
 public class RabbitHole {
     ArrayList<String> events;
     int numTea;
@@ -8,10 +20,9 @@ public class RabbitHole {
     String book;
     Character character;
     Boolean readBook;
-    Boolean inBed;
     int index;
     Boolean changeFloor;
-    Boolean spreadJam;
+    Boolean hasJam;
 
     /**
      * Constructs rabbit hole.
@@ -30,10 +41,9 @@ public class RabbitHole {
         this.book = "\"Welcome to Wonderland!\"";
         this.character = character;
         this.readBook = false;
-        this.inBed = false;
         this.index = 0;
         this.changeFloor = true;
-        this.spreadJam = false;
+        this.hasJam = false;
 
     }
     
@@ -53,19 +63,18 @@ public class RabbitHole {
                 System.out.println(this.events.get(this.index));
                 this.changeFloor = false;
 
+            }
+
+            String command = this.character.command();
+            userAction(command);
+
         }
-
-        String command = this.character.command();
-        userAction(command);
-
-    }
-
     
     }
 
     /**
-     * Finds Action key word and calls object.
-     * @param command String for user command
+     * Finds Action key word and calls the specific actions function.
+     * @param command String for user input.
      */
     public void userAction(String command){
 
@@ -75,30 +84,37 @@ public class RabbitHole {
         } else if (command.contains("drink")){
             actionDrink(command);
 
-        }else if(command.contains("take")){
+        } else if(command.contains("take")){
             actionTake(command);
 
-        }else if (command.contains("get in")){
-           actionGetIn(command);
+        } else if (command.contains("get in")){
+           this.character.actionGetIn(command, this.events.get(this.index));
 
-        }else if (command.contains("sleep")){
-            actionSleep(command);
-           
-        }else if(command.contains("spread")  && this.events.get(this.index).contains(" jam")){
+        } else if (command.contains("sleep")){
+            this.character.actionSleep();     
+
+        } else if(command.contains("spread")  && this.events.get(this.index).contains(" jam")){
            actionSpread(command);
 
-        }else if (command.contains("eat")){
+        } else if (command.contains("eat")){
             actionEat(command);
 
-        }else if(command.contains("down") && this.index < 2){
+        } else if(command.contains("down") && this.index < 2){
             this.index += 1;
             this.changeFloor = true;
 
         } else if (command.contains("check")){
             actionCheck(command);
 
-        } else {
+        } else if (command.contains("drop")){
+            this.character.drop(command);
+
+        } else if (command.contains("clue")) {
+            actionClue();
+
+        }else {
             System.out.println("I don't know that command yet.");
+
         }
         
     }
@@ -112,7 +128,12 @@ public class RabbitHole {
             this.character.bag.add("knife");
             System.out.println("You now have a knife. What do you want to do with it?");
     
-        } else {
+        } else if (command.contains("scone") && this.events.get(this.index).contains("scone") && this.numScone>=1){
+            this.character.bag.add("scone");
+            this.numScone-=1;
+            System.out.println("You now have a scone. What do you want to do with it?");
+
+        }else {
             System.out.println("What do you want to take?");
     
         }
@@ -124,7 +145,7 @@ public class RabbitHole {
      */
     public void actionSpread(String command){
         if (command.contains("jam") && this.character.bag.contains("knife")){
-            this.spreadJam = true;
+            this.hasJam = true;
             System.out.println("Mmmm, what do you want to do now?");
             
         } else {
@@ -138,25 +159,48 @@ public class RabbitHole {
      * @param command String for user command.
      */
     public void actionEat(String command){
-        if(this.spreadJam && this.character.health <= 92 && this.numScone >= 1){
-            this.character.health +=8;
-            this.numScone -= 1;
 
-        } else if(this.spreadJam && this.character.health > 92 && this.numScone >= 1){
-            this.character.health = 100;
-            this.numScone -= 1;
+        if (command.contains("scone")){
 
-        } else if (this.character.health <= 95 && this.numScone >= 1){
-            this.character.health += 5;
+            if (this.character.bag.contains("scone")){
 
-        } else if (this.character.health > 95 && this.numScone >= 1){
-            this.character.health += 5;
+                if (this.hasJam){
+                    if(this.character.health <= 92){
+                        this.character.health +=8;
+            
+                    } else if(this.character.health > 92 ){
+                        this.character.health = 100;
+            
+                    }
 
-        }else {
+                    this.hasJam = false;
+
+                } else {
+                    if (this.character.health <= 95 ){
+                        this.character.health += 5;
+            
+                    } else if (this.character.health > 95){
+                        this.character.health =100;
+
+                    }
+
+                }
+
+                this.character.drop("scone");
+
+
+            } else {
+                System.out.println("You do not have a scone in your inventory.");
+
+            }
+
+        } else {
             System.out.println("What do you want to eat?");
 
         }
     }
+
+
 
     /**
      * Completes user action for drink command.
@@ -174,21 +218,6 @@ public class RabbitHole {
     }
 
     /**
-     * Completes action for get in command.
-     * @param command String user command.
-     */
-    public void actionGetIn(String command){
-        if (command.contains("bed") && this.events.get(this.index).contains("bed")){
-            this.inBed = true;
-            System.out.println("Maybe you should try to sleep before your journey...");
-
-        } else{
-            System.out.println("What do you want to get in?");
-
-        }
-    }
-
-    /**
      * Completes user action for read command.
      * @param command String for user command.
      */
@@ -201,35 +230,33 @@ public class RabbitHole {
             System.out.println("What do you want to read?");
 
         }
-    }
-
-    /**
-     * Completes under action for sleep command.
-     * @param command String for user command.
-     */
-    public void actionSleep(String command){
-
-        if (this.character.health <= 90 && this.inBed){
-            this.character.health += 10;
-            System.out.print("💤💤💤");
-
-        } else if (this.character.health > 90){
-            this.character.health = 100;
-            
-        } else {
-            System.out.println("You can't sleep there...");
-
-        }
-
     }    
 
+
+    /**
+     * Checks inventory and checks health.
+     * @param command string for user input.
+     */
     public void actionCheck(String command){
         if (command.contains("inventory")){
             this.character.inventoryToString();
 
         } else if (command.contains("health")){
             this.character.healthToString();
+
         }
+    }
+
+    public void actionClue(){
+        System.out.println("+--------------------------------+");
+        System.out.println("|   Some Commands to try:        |");
+        System.out.println("|   - 'take'                     |");
+        System.out.println("|   - 'drop'                     |");
+        System.out.println("|   - 'sleep'                    |");
+        System.out.println("|   - 'eat'                      |");
+        System.out.println("|   - 'spread'                   |");
+        System.out.println("+--------------------------------+");
+
     }
 
     public static void main(String[] args){

@@ -1,6 +1,19 @@
 //imports
 import java.util.ArrayList;
 
+/**
+ * Represents march manor
+ * @param floors array list of strings for the story on each floor
+ * @param character the users character
+ * @param inHouse whether the character is in the house
+ * @param newRoom whether the character is in a new room
+ * @param index int for the floor the character is on
+ * @param kitchen string describing the kitchen
+ * @param fire boolean for if there is a fire
+ * @param inKitchen Boolean for the fire being on
+ * @param pill string for the pill size
+ * @param numCake int for amount of cake slices
+ */
 public class MarchManor {
     ArrayList<String> floors;
     Character character;
@@ -10,9 +23,13 @@ public class MarchManor {
     String kitchen;
     Boolean inKitchen;
     Boolean fire;
-    Boolean inBed;
     String pill;
+    int numCake;
 
+    /**
+     * Constructs a two story house many features.
+     * @param character the users character.
+     */
     public MarchManor(Character character){
 
         ArrayList<String> floors = new ArrayList<String>();
@@ -30,11 +47,14 @@ public class MarchManor {
         this.kitchen = kitchen;
         this.inKitchen = false;
         this.fire = true;
-        this.inBed = false;
         this.pill = pill;
+        this.numCake = 6;
 
     }
 
+    /**
+     * Game loop for the manor class
+     */
     public void play(){
         System.out.println("Type \"enter\" if you want to go into the house.");
 
@@ -61,11 +81,12 @@ public class MarchManor {
 
         }
 
-
     }
-    // only enter manner when small 
-    //she get too big in the house dies
 
+    /**
+     * Finds the action key word in the command
+     * @param command string for user input
+     */
     public void userAction(String command){
         if (command.contains("enter")|| command.contains(("ENTER"))|| command.contains("Enter")){
             actionEnter();
@@ -86,10 +107,10 @@ public class MarchManor {
             actionClimb(command);
 
         } else if (command.contains("get in")){
-            actionGetIn(command);
+            this.character.actionGetIn(command, this.floors.get(this.index));
 
         } else if (command.contains("sleep")){
-            actionSleep(command);
+            this.character.actionSleep();
 
         } else if (command.contains("swallow") || command.contains("use")){
             actionPill(command);
@@ -100,7 +121,12 @@ public class MarchManor {
         } else if (command.contains("check")){
             this.character.inventoryToString();
             
-        } else {
+        } else if (command.contains("drop")){
+            this.character.drop(command);
+            
+        } else if (command.contains("clue")){
+            printCommand();
+        }else {
             System.out.println("I don't know that command yet.");
         }
 
@@ -114,6 +140,10 @@ public class MarchManor {
 
     }
 
+    /**
+     * Exits the house if there is a door.
+     * @param command string describing user input
+     */
     public void actionExit(String command){
         if (this.floors.get(this.index).contains("door") && command.contains("door")){
             this.inHouse = false;
@@ -127,6 +157,7 @@ public class MarchManor {
 
     /**
      * If the user goes to the kitchen prints out kitchen description.
+     * @param command string describing user input.
      */
     public void actionInvestigate(String command){
         if (this.floors.get(this.index).contains("kitchen") && command.contains("kitchen")){
@@ -161,31 +192,46 @@ public class MarchManor {
        
     }
 
+    /**
+     * If the user wants to eat cake and there is cake adds health.
+     * @param command String for user input.
+     */
     public void actionEat(String command){
         if (command.contains("cake")){
-            if(this.character.bag.contains("fork")|| this.inKitchen){
-                this.character.health += this.character.health/4;
+            if (this.numCake >= 1){
+                if(this.character.bag.contains("fork")|| this.inKitchen){
+                    this.character.health += this.character.health/4;
+    
+                } else{
+                    this.character.health = 100;
+                }
+                System.out.println(this.character.name +"'s health is "+ this.character.health);
 
-            } else{
-                this.character.health = 100;
             }
-            System.out.println(this.character.name +"'s health is "+ this.character.health);
 
         } else {
             System.out.println("What do you want to eat?");
         }
     }
 
+    /**
+     * Puts out fire if the user has a bucket of water.
+     * @param command string describing user input.
+     */
     public void actionFire(String command){
         if (this.character.bag.contains("bucket")){
             this.fire = false;
             System.out.println("You look up the chimney and see a narrow ladder.");
 
         } else {
-            System.out.println("You cannot put out the water because you do not have a bucket.");
+            System.out.println("You cannot put out the fire because you do not have a bucket.");
         }
     }
 
+    /**
+     * Climbs the lader up or down if the character can fit through the chimney.
+     * @param command string describing user input.
+     */
     public void actionClimb(String command){
         if (this.fire == false){
             if ( this.character.size <= 80){
@@ -209,24 +255,10 @@ public class MarchManor {
         }
     }
 
-    public void actionGetIn(String Command){
-        if (this.floors.get(this.index).contains("bed")){
-            this.inBed = true;
-
-        }else {
-            System.out.println("There is not bed in this room.");
-        }
-    }
-
-    public void actionSleep(String command){
-        if (this.inBed){
-            this.character.health += 10;
-
-        } else{
-            System.out.println("You are not in bed, so you cannot sleep.");
-        }
-    }
-
+    /**
+     * Takes pill every other pill is big or small.
+     * @param command string describing user input.
+     */
     public void actionPill(String command){
 
         if (command.contains("pill") && this.character.bag.contains("pill")){
@@ -248,7 +280,11 @@ public class MarchManor {
         }     
 
     } 
-       
+
+    /**
+     *  checks inventory or health
+     * @param command string for user input 
+     */
     public void actionCheck(String command){
         if (command.contains("inventory")){
             this.character.inventoryToString();
@@ -257,7 +293,18 @@ public class MarchManor {
             this.character.healthToString();
         }
     }
-    
+
+    public void printCommand(){
+        System.out.println("+--------------------------------+");
+        System.out.println("|   Some Commands to try:        |");
+        System.out.println("|   - 'take'                     |");
+        System.out.println("|   - 'drop'                     |");
+        System.out.println("|   - 'sleep'                    |");
+        System.out.println("|   - 'swallow'                  |");
+        System.out.println("+--------------------------------+");
+
+    }
+
     public static void main(String[] args){
         Character a = new Character( 1, 1);
         MarchManor m = new MarchManor(a);

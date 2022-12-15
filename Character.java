@@ -3,6 +3,21 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a character
+ * @param map 2d array for the map of wonderland
+ * @param name the name of the character
+ * @param size double for the size
+ * @param originalSize final variable for original size
+ * @param locationC int for characters column number in the 2d array
+ * @param locationR int for characters row number in the 2d array
+ * @param canFly Boolean for whether the character can fly
+ * @param canWalk Boolean for whether the character can walk
+ * @param health double for the health of the character
+ * @param bag set array list for the characters bag
+ * @param scan Scanner
+ * @param canSleep Boolean for whether the character can sleep
+ */
 public class Character{
     String[][] map = new String[5][5];
     String name;
@@ -15,6 +30,7 @@ public class Character{
     double health;
     ArrayList<String> bag;
     Scanner scan;
+    Boolean canSleep;
 
 
      /**
@@ -42,8 +58,13 @@ public class Character{
         this.health = 50;
         Scanner scan = new Scanner(System.in);
         this.scan = scan;
+        this.canSleep = false;
 
     }
+
+    /**
+     * Runs the play loop for character
+     */
     public void play(){
         System.out.println("Chose your character!!");
         System.out.println("***********************");
@@ -52,8 +73,13 @@ public class Character{
         String name = scan.nextLine();
 
         this.name = name;
+
     }
 
+    /**
+     * Creates scanner to take in any user command
+     * @return command that the user inputted
+     */
     public String command(){
         System.out.println("***********************");
         String command = "Not command";
@@ -68,7 +94,7 @@ public class Character{
 
     /**
      * Picks up item to call examine and prevents movement
-     * @param command string describing the user action
+     * @param command string describing the user input.
      */
     public void grab(String command){
         int openSpots = 0;
@@ -95,6 +121,31 @@ public class Character{
     }
 
     /**
+     * Drops a selected item from the bag.
+     * @param command string describing user input.
+     */
+    public void drop(String command){
+        if (command.contains("knife")){
+            this.bag.remove("knife");
+
+       } else if (command.contains("fork")){
+            this.bag.remove("fork");
+
+       } else if (command.contains("bucket")){
+            this.bag.remove("bucket");
+
+       } else if (command.contains("pill")){
+            this.bag.remove("pill");
+
+       } else if (command.contains("bucket")){
+            this.bag.remove("bucket");
+
+       } else if (command.contains("scone")){
+            this.bag.remove("scone");
+       }
+    }
+
+    /**
      * Creates string to describe character.
      * @return string that describes the character.
      */
@@ -107,6 +158,40 @@ public class Character{
             fly = "cannot";
         }
         return this.name + " is " + this.size + " inches tall. " + this.name + " is located at coordinates (" + this.locationR +", " + this.locationC + ") on the map of Wonderland. Currently alice " + fly + " fly. According to the map: " + this.map[this.locationC][this.locationR];
+    }
+
+    /**
+     * If the character is in bed function adds 10 points to health or makes health 100.
+     */
+    public void actionSleep(){
+
+        if (this.health <= 90 && this.canSleep){
+            this.health += 10;
+            System.out.print("💤💤💤");
+
+        } else if (this.health > 90){
+            this.health = 100;
+            
+        } else {
+            System.out.println("You have to be in bed to sleep silly. ");
+
+        }
+
+    }
+
+     /**
+     * Completes action for get in command.
+     * @param command String user command.
+     */
+    public void actionGetIn(String command, String place){
+        if (command.contains("bed") && place.contains("bed")){
+            this.canSleep = true;
+            System.out.println("Maybe you should try to sleep before your journey...");
+
+        } else{
+            System.out.println("What do you want to get in?");
+
+        }
     }
 
     /**
@@ -129,12 +214,15 @@ public class Character{
 
     }
 
+    /**
+     * Prints out character health and an emoji to indicate low or high battery.
+     */
     public void healthToString(){
 
-        if (this.health>= 95){
+        if (this.health>= 80){
             System.out.println(this.name + "'s health is: " + this.health + " 🔋 ");
 
-        } else if (this.health <= 10){
+        } else if (this.health <= 20){
             System.out.println(this.name + "'s health is: " + this.health + " 🪫 ");
 
         } else {
