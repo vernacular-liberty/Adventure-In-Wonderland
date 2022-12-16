@@ -28,9 +28,9 @@ public class FungiForest {
     public void conversation(){
         System.out.println();
 
-        System.out.println("Blue and exactly 3 inches tall, the caterpillar is perched on the cap of a large mushroom. You want to talk to him. Mad or not, he seems like he might be able to help!");
-        System.out.println("Intrigued by this strange creature, you hoist yourself up onto the mushroom to get his attention.");
-        System.out.println("The caterpillar holds his breath, staring at you wordlessly. Finally, he opens his mouth, exhaling a ring of colorful smoke right into your face. You start to feel kind of funny, and your throat itches.");
+        this.character.printSlow("Blue and exactly 3 inches tall, the caterpillar is perched on the cap of a large mushroom. You want to talk to him. Mad or not, he seems like he might be able to help!");
+        this.character.printSlow("Intrigued by this strange creature, you hoist yourself up onto the mushroom to get his attention.");
+        this.character.printSlow("The caterpillar holds his breath, staring at you wordlessly. Finally, he opens his mouth, exhaling a ring of colorful smoke right into your face. You start to feel kind of funny, and your throat itches.");
 
         //List that stores canned responses
         ArrayList <String> canned_responses = new ArrayList<String>(Arrays.asList("Whyyy?", "Mmhm...", 
@@ -38,12 +38,13 @@ public class FungiForest {
         "Okay, fine, I'll give you some advice. Find the magic mushrooms and you may just survive this.", "Speak up!"));
 
         System.out.println();
-        System.out.println(cat.hint("caterpillar"));
+        this.character.printSlow(cat.hint("caterpillar"));
         System.out.println();
 
         character.health-=5;
 
-        System.out.println("CATERPILLAR: Whooo are yooou?");
+        System.out.println("Finally, the CATERPILLAR speaks.");
+        this.character.printSlow("CATERPILLAR: Whooo are yooou?");
 
         //define scanner
         Scanner response = new Scanner(System.in);
@@ -78,8 +79,9 @@ public class FungiForest {
                     }
                 }
             }
-            System.out.println(bot_response);
+            this.character.printSlow(bot_response);
             System.out.println("[HP: " + character.health + "]"); //maybe make this red
+            this.character.printSlow("***********************");
         }
 
         System.out.println();
