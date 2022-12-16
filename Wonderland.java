@@ -10,7 +10,7 @@ public class Wonderland extends Thread{
     private TulgeyWoods tulgeyWoods;
     private Boolean changeLocation;
     Character character;
-
+    CheshireCat cat;
 
     public Wonderland(){
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long trek through the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
@@ -21,12 +21,12 @@ public class Wonderland extends Thread{
         
         Random random = new Random();
         Character character = new Character(random.nextInt(5), random.nextInt(5));
+        cat = new CheshireCat();
         this.character = character;
-        this.fungiForest = new FungiForest(this.character);
+        this.fungiForest = new FungiForest(this.character, cat);
         this.tulgeyWoods = new TulgeyWoods(this.character);
         this.rabbitHole = new RabbitHole(this.character);
         this.changeLocation = true;
-
     }
 
     /**
