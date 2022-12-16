@@ -9,14 +9,16 @@ public class FungiForest {
     
     Character character;
     Boolean inConversation;
+    CheshireCat cat;
 
     /**
      * Constructs Fungi Forest.
      * @param character the character playing the game
      */
-    public FungiForest(Character character){
+    public FungiForest(Character character, CheshireCat cat){
         this.character=character;
         this.inConversation =true;
+        this.cat = cat;
     }
 
     /**
@@ -33,10 +35,10 @@ public class FungiForest {
         //List that stores canned responses
         ArrayList <String> canned_responses = new ArrayList<String>(Arrays.asList("Whyyy?", "Mmhm...", 
         "That is wrong beginning to end!", "Are you going to lose your temper?", "Why are you talking to me about this?",
-        "Okay, fine, I'll give you some advice. Find the magic mushrooms and you'll never have to walk another step.", "Speak up!"));
+        "Okay, fine, I'll give you some advice. Find the magic mushrooms and you may just survive this.", "Speak up!"));
 
         System.out.println();
-        System.out.println("[HINT: The longer you stay here, the worse this will get. Try not to talk about yourself too much; it really gets him going. And don't forget--you can't leave without a proper \"goodbye\"! For some reason, the caterpillar is very particular about this sort of thing.]");
+        System.out.println(cat.hint("caterpillar"));
         System.out.println();
 
         character.health-=5;
@@ -77,7 +79,7 @@ public class FungiForest {
                 }
             }
             System.out.println(bot_response);
-            System.out.println("[WARNING] health: " + character.health); //maybe make this red
+            System.out.println("[HP: " + character.health + "]"); //maybe make this red
         }
 
         System.out.println();
@@ -89,7 +91,8 @@ public class FungiForest {
     
     public static void main(String[] args){
         Character a = new Character( 1, 1);
-        FungiForest m = new FungiForest(a);
+        CheshireCat c = new CheshireCat();
+        FungiForest m = new FungiForest(a, c);
         m.conversation();
     }
 }
