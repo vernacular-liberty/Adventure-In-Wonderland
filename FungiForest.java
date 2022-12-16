@@ -66,7 +66,7 @@ public class FungiForest {
                 else{ 
                     //generates caterpillar's response
                     for (int i=0; i < words.length; i++) {
-                        if(words[i].equals("I") || words[i].equals("i") || (words[i].equals("I"))){ //maybe also me
+                        if(words[i].equals("I") || words[i].equals("i") || (words[i].equals("me") || (words[i].equals("Me")))){ //maybe also me
                             character.health-=2.5;
                             bot_response = "CATERPILLAR: You! Who are you!?";
                             break;
