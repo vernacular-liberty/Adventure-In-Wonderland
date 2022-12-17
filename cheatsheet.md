@@ -16,7 +16,7 @@ To get started on your exploration we will provide some of the key comand words:
 
 *Remember to read the text to find the objects.
 
-Beware, you will die and the game will be terminated your health drops below 0 so be sure to eat, sleep, and drink when you can.
+Beware, you will die and the game will be terminated your health drops below 0 so be sure to eat, sleep, and drink when you can. Additionaly you do not start the game with 100 health points.
 
 To check your health and inventory at any point use these key words:
  - "check" + "inventory" or "health"
