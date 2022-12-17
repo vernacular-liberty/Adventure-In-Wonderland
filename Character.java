@@ -77,7 +77,7 @@ public class Character{
 
     /**
      * Creates scanner to take in any user command
-     * @return command that the user inputted
+     * @return command that the user inputted in lower case
      */
     public String command(){
         printSlow("***********************");
@@ -87,7 +87,7 @@ public class Character{
             command = this.scan.nextLine();
 
         }
-        return command;
+        return command.toLowerCase();
 
     }
 
