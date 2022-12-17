@@ -10,7 +10,7 @@ public class Wonderland extends Thread{
     private TulgeyWoods tulgeyWoods;
     private Boolean changeLocation;
     Character character;
-    CheshireCat cat;
+
 
     public Wonderland(){
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long trek through the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
@@ -21,12 +21,12 @@ public class Wonderland extends Thread{
         
         Random random = new Random();
         Character character = new Character(random.nextInt(5), random.nextInt(5));
-        cat = new CheshireCat();
         this.character = character;
-        this.fungiForest = new FungiForest(this.character, cat);
+        this.fungiForest = new FungiForest(this.character);
         this.tulgeyWoods = new TulgeyWoods(this.character);
         this.rabbitHole = new RabbitHole(this.character);
         this.changeLocation = true;
+
     }
 
     /**
@@ -85,10 +85,10 @@ public class Wonderland extends Thread{
      * @param command
      */
     public void userAction(String command){
-        if (command.contains("walk")||command.contains("Walk")){
+        if (command.contains("walk")){
             walkDirection(command);
     
-        } else if(command.contains("fly")||command.contains("Fly")){
+        } else if(command.contains("fly")){
             //Fly();
         } else if (command.contains("drop")){
             this.character.drop(command);
@@ -107,16 +107,16 @@ public class Wonderland extends Thread{
      * @param command
      */
     public void walkDirection(String command){
-        if (command.contains("north") || command.contains("North")){
+        if (command.contains("north")){
             walkNorth(command);
 
-        } else if (command.contains("south") || command.contains("South")){
+        } else if (command.contains("south")){
             walkSouth(command);
 
-        } else if(command.contains("west")||command.contains("West")){
+        } else if(command.contains("west")){
             walkWest(command);
 
-        } else if (command.contains("east")||command.contains("East")){
+        } else if (command.contains("east")){
             walkEast(command);
 
         } else{
@@ -208,7 +208,7 @@ public class Wonderland extends Thread{
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
             this.fungiForest.conversation();
 
-        } if (this.map[this.character.locationC][this.character.locationR].contains("Tugley woods")){
+        } if (this.map[this.character.locationC][this.character.locationR].contains("TulgeyEmma woods")){
             this.tulgeyWoods.play();
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("gabled")){
