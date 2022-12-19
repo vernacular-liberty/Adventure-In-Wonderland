@@ -12,7 +12,7 @@ To get started on your exploration we will provide some of the key comand words:
  - "eat"
  - "drink"
  - "go" + "west" (you can use any direction)
- - "clue" (will provide hints on action words)
+ - "clue" (will provide hints on other action words)
 
 *Remember to read the text to find the objects.
 
