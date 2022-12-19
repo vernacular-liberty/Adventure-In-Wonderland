@@ -21,6 +21,7 @@ To get started on your exploration we will provide some of the key comand words:
  - "spread"
  - "sleep"
  - "get in"
+ - "fly"
  - "go" + "west" (you can use any direction)
  - "clue" (will provide hints on other action words)
 
