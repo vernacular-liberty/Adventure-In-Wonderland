@@ -22,6 +22,8 @@ To get started on your exploration we will provide some of the key comand words:
  - "sleep" + object
  - "get in" + object
  - "fly" + coordinates
+ - "move" + object
+ - "hit" + object
  - "go" + "west" (you can use any direction)
  - "clue" (will provide hints on other action words)
 
