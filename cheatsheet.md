@@ -9,21 +9,24 @@ The map for the game is roughly based on the map of wonderland bellow.
 
 It is meant to be a bit of a guessing game, which is why there is no penalty for being wrong or getting stuck. If nothing happens when you enter a command, you can re-try as many times as you like. Look for hints in the prompts and make sure you spell everything correctly.
 
-To get started on your exploration we will provide some of the key comand words:
- - "take" + object
- - "drop" + object
- - "eat" + object
- - "drink" + object
- - "put out" + object
- - "climb" + object
- - "swallow" + object
- - "use" + object
- - "spread" + object
- - "sleep" + object
- - "get in" + object
- - "fly" + coordinates
+To get started on your exploration we will provide the key comand words:
+ - "take" + "knife" or "scone" or "bucket" or "water" or "fork" or "slice of cake"
+ - "drop" +"knife" or "scone" or "bucket" or "water" or "fork" or "slice of cake"
+ - "eat" + "cake" or "scone"
+ - "drink" + "tea" or "water"
+ - "go to" or "investigate" or "check out" + "kitchen" or "taboret"
+ - "put out" + "fire"
+ - "down" (allows you to go down a level in the rabbitHole)
+ - "climb" or "go up" or "go down" + "ladder"
+ - "use" or "swallow" + "pill"
+ - "spread" + "jam"
+ - "sleep"
+ - "get in" + "bed"
+ - "exit" or "unlock" or "open" or "go outside" + "door"
+ - "fly" + coordinates (can't do this yet, something to come)
  - "move" + object
  - "hit" + object
+ - "enter"
  - "go" + "west" (you can use any direction)
  - "clue" (will provide hints on other action words)
 
