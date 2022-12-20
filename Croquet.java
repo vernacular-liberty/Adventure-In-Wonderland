@@ -1,7 +1,7 @@
 //imports
 import java.util.Random;
 
-// import java.util.ArrayList;
+
 
 public class Croquet {
  
@@ -21,7 +21,6 @@ public class Croquet {
 
   /**
    * Randomly decides who will have the first turn
-   * @param <Turn>
    * @param Turn
    * @return whosTurn
    */
@@ -36,13 +35,14 @@ public class Croquet {
     }
   }
 
-  /**
-   * Changes health status when user plays croquet based on size.
-   * @return 
-   */
-  // Method for playing a game of croquet
-  
+/**
+ * Simulates a game of croquet between the player and the queen.
+ *
+ * @param character the player character
+ * @return the score of the player after the game
+ */
     public void play() {
+        this.size = 60;
         // Print a message to the console asking the player if they want to play
         System.out.println("The queen demands that you play a game of croquet with her. Answer yes or no.");
       
@@ -73,7 +73,7 @@ public class Croquet {
         
     } else {
         this.character.health -= this.character.health / 4;
-        System.out.println("You play a few games to keep your head. After the games your health is: " + this.character.health + ".");
+        System.out.println("Your health is: " + this.character.health + ".");
     }
         firstTurn();
       // Begin the game loop
