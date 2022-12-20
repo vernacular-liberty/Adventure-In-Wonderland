@@ -114,7 +114,8 @@ class Character{
     }
 
     /**
-     * Prints statements our slowly
+     * Prints statements our slowly using a sleeper function
+     * @param text String for the text to be printed
      */
     public void printSlow(String text){
         try {
@@ -139,8 +140,8 @@ class Character{
     }
 
     /**
-     * Picks up item to call examine and prevents movement
-     * @param command string describing the user input.
+     * Picks up item to add the item to the bag if the place actually has the item.
+     * @param command String describing the user input.
      */
     public void grab(String command){
         int openSpots = 0;
@@ -158,7 +159,7 @@ class Character{
             } else if (this.map[this.locationC][this.locationR].contains("fungi")){
                 this.bag.add("fungi");
 
-            } else{
+            }else{
                 printSlow("You cannot grab that item.");
             }
         } else {
@@ -183,36 +184,51 @@ class Character{
        } else if (command.contains("pill")){
             this.bag.remove("pill");
 
-       } else if (command.contains("bucket")){
-            this.bag.remove("bucket");
+       } else if (command.contains("cake")){
+            this.bag.remove("cake");
 
        } else if (command.contains("scone")){
             this.bag.remove("scone");
        }
     }
 
+    /**
+     * Allows user to eat an item
+     * @param command String describing the user input.
+     */
     public void actionEat(String command){
         if (command.contains("scone")){
             this.bag.remove("scone");
+            this.health += 5;
 
-        } if (command.contains("cake")){
+        } if (command.contains("slice of cake")){
             this.bag.remove("cake");
+            this.health += 8;
         }
     }
 
-    /**
-     * Creates string to describe character.
-     * @return string that describes the character.
+     /**
+     * Allows user to drink water
+     * @param command String describing the user input.
      */
-    public String toString(){
-        String fly;
+    public void actionDrink(String command){
+        if (command.contains("water")){
+            if (this.bag.contains("bucket")){
+                this.health += 5;
 
-        if (this.canFly){
-            fly = "can";
-        } else {
-            fly = "cannot";
+            }else{
+                this.printSlow("You don't have any water to drink.");
+
+            }
+
+        } else if (this.map[this.locationC][this.locationR].contains("water")){
+            this.health += 5;
+
+        }else{
+            this.printSlow("What do you want to drink?");
+
         }
-        return this.name + " is " + this.size + " inches tall. " + this.name + " is located at coordinates (" + this.locationR +", " + this.locationC + ") on the map of Wonderland. Currently alice " + fly + " fly. According to the map: " + this.map[this.locationC][this.locationR];
+        
     }
 
     /**
@@ -275,6 +291,20 @@ class Character{
         }
     }
 
+     /**
+     * Checks inventory and checks health.
+     * @param command string for user input.
+     */
+    public void actionCheck(String command){
+        if (command.contains("inventory")){
+            this.inventoryToString();
+
+        } else if (command.contains("health")){
+            this.healthToString();
+
+        }
+    }
+
     /**
      * Prints out user inventory.
      */
@@ -310,6 +340,23 @@ class Character{
             printSlow(this.name + "'s health is: " + this.health);
 
         }
+    }
+
+   
+
+    /**
+     * Creates string to describe character.
+     * @return String that describes the character.
+     */
+    public String toString(){
+        String fly;
+
+        if (this.canFly){
+            fly = "can";
+        } else {
+            fly = "cannot";
+        }
+        return this.name + " is " + this.size + " inches tall. " + this.name + " is located at coordinates (" + this.locationR +", " + this.locationC + ") on the map of Wonderland. Currently alice " + fly + " fly. According to the map: " + this.map[this.locationC][this.locationR];
     }
 
     public static void main(String[] args){

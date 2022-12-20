@@ -1,7 +1,18 @@
 //imports
 import java.lang.Thread;
 
-public class Wonderland extends Thread{
+/**
+ * Represents a Wonderland World
+ * @param map 2d array representing the map of places in wonderland
+ * @param fungiForest a location for fungi forest
+ * @param rabbitHole a location for rabbit hole
+ * @param tulgeyWoods a location for tulgey woods
+ * @param cat a cheshire cat
+ * @param changeLocation whether the location just changed or not
+ * @param character the user's character
+
+ */
+public class Wonderland{
     String[][] map = new String[5][5];
     //private Croquet croquet;
     private FungiForest fungiForest;
@@ -12,8 +23,11 @@ public class Wonderland extends Thread{
 
     Character character;
 
-
+    /**
+     * Constructs a wonderland world
+     */
     public Wonderland(){
+        //creates a map
         this.map = new String[][]{{"You have reached the edge of Wonderland. The sky and sea melt together into one grey plain.", "You walk along the beach to find a bottle of pills washed up on the shore.", "You have reached the light house at the endless sea... ", "After a long trek through the mountains you have reached the top of Mont Jubjub! You can see anything from here", "The far castle!"}, 
         {"You have entered the croquet grounds. An intense game is taking place between Tweedledee and Tweedledum.","You have reached the grandest Castle in all the land, the castle of the queen of hearts.", "Court House", "You have reached the royal rose gardens.", "You are at the base of the mountains of division."}, 
         {"You have reached the Mad Hatters house. It appear there is a tea party in session!", "You have reached the duchesses manner.", "You emerge from the woods into a meadow surrounding a small gabled house. You enter the house on the table is a container of pills.", "You enter a grove of massive mushrooms. Your eyes meet those of caterpillar who ignores you and takes a drag of a long hookah.", "Chilled to the bone you hurry on through the woods in the hopes of finding shelter."}, 
@@ -31,7 +45,7 @@ public class Wonderland extends Thread{
     }
 
     /**
-     * Plays the rabbitHole sequence
+     * Plays the game sequence
      */
     public void play(){
         this.character.play();
@@ -56,7 +70,8 @@ public class Wonderland extends Thread{
     }
 
     /**
-     * @param text
+     * Prints text slowly
+     * @param text string for text to print slowly
      */
     public void printSlow(String text){
         try {
@@ -91,6 +106,8 @@ public class Wonderland extends Thread{
     
         } else if(command.contains("fly")){
             //Fly();
+            printSlow("this ability is not available yet");
+
         } else if (command.contains("drop")){
             this.character.drop(command);
 
@@ -100,7 +117,13 @@ public class Wonderland extends Thread{
         } else if (command.contains("sleep")){
             this.character.actionSleep();
 
-        } 
+        }  else if (command.contains("drink")){
+            this.character.actionDrink(command);
+
+        } else if (command.contains("check")){
+            this.character.actionCheck(command);
+
+        }
     }
     
     /**
@@ -189,6 +212,9 @@ public class Wonderland extends Thread{
         }
     }
 
+    /**
+     * Investigates place on the map and sends character to that place
+     */
     public void investigate(){
         if (this.map[this.character.locationC][this.character.locationR].contains("pill")){
             printSlow("You can use grab(\"pill\") to learn more.");
@@ -197,10 +223,12 @@ public class Wonderland extends Thread{
             printSlow("You can use grab(\"fungi\") to learn more.");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("water")){
-            printSlow("You can use use(\"water\") to learn more.");
+            printSlow("You can drink (\"water\") to learn more.");
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("door")){
-            printSlow("You can use use(\"door\") to learn more.");    
+            //printSlow("You can use use(\"door\") to learn more.");    
+            printSlow("This function is coming soon.");    
+
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("croquet")){
             Croquet croquet = new Croquet(this.character);
@@ -223,14 +251,6 @@ public class Wonderland extends Thread{
             printSlow("Note: If you grab an item you will lose the ability to fly.");
     
         }
-    }
-
-    public void printStatement(String statement){
-
-    }
-
-    public String toString(){
-        return "Character: " + this.character.health;
     }
 
     public static void main(String[] args){

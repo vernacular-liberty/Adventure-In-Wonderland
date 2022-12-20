@@ -105,13 +105,13 @@ public class RabbitHole {
      */
     public void userAction(String command){
 
-        if (command.contains("read") && this.events.get(this.index).contains("book")){
+        if (command.contains("read")){
           actionRead(command);
 
         } else if (command.contains("drink")){
             actionDrink(command);
 
-        } else if(command.contains("take")){
+        } else if(command.contains("take") || command.contains("grab") ){
             actionTake(command);
 
         } else if (command.contains("get in")){
@@ -120,10 +120,10 @@ public class RabbitHole {
         } else if (command.contains("sleep")){
             this.character.actionSleep();     
 
-        } else if (command.contains("investigate") || command.contains("check out")){
+        } else if (command.contains("investigate") || command.contains("check out") || command.contains("go to")){
             actionInvestigate(command);
 
-        }else if(command.contains("spread")  && this.events.get(this.index).contains(" jam")){
+        }else if(command.contains("spread")){
            actionSpread(command);
 
         } else if (command.contains("eat")){
@@ -133,7 +133,7 @@ public class RabbitHole {
             actionDown();
             
         } else if (command.contains("check")){
-            actionCheck(command);
+            this.character.actionCheck(command);
 
         } else if (command.contains("drop")){
             this.character.drop(command);
@@ -185,14 +185,27 @@ public class RabbitHole {
      * @param command String for user command,
      */
     public void actionSpread(String command){
-        if (command.contains("jam") && this.character.bag.contains("knife")){
-            this.hasJam = true;
-            this.character.printSlow("Mmmm, what do you want to do now?");
-            
+        if (this.character.bag.contains("knife")){
+            if (command.contains("jam")){
+                if (this.events.get(this.index).contains(" jam" )){
+                    this.hasJam = true;
+                    this.character.printSlow("Mmmm, what do you want to do now?");
+                    
+                } else {
+                    this.character.printSlow("There is no jam here.");
+                
+                }
+    
+            } else{
+                this.character.printSlow("What do you want to spread? ");
+
+            }
+
         } else {
-            this.character.printSlow("What do you want to spread? Do you need a knife?");
-        
+            this.character.printSlow("You need a knife!");
+
         }
+       
     }
 
     /**
@@ -244,7 +257,7 @@ public class RabbitHole {
 
 
     /**
-     * Completes user action for drink command.
+     * Completes user action for drink command and subtracts tea from total tea
      * @param command String for user command.
      */
     public void actionDrink(String command){
@@ -259,34 +272,27 @@ public class RabbitHole {
     }
 
     /**
-     * Completes user action for read command.
+     * Completes user action for read command and changes readBook to true to indicate that the user can access the level on the bottom floor.
      * @param command String for user command.
      */
     public void actionRead(String command){
-        if (command.contains("book")){
-            this.character.printSlow("You open the book, on the first page it says: " + this.book);
-            this.readBook = true;
-            this.character.printSlow(this.bottom);
+        if (this.events.get(this.index).contains("book")){
+            if (command.contains("book")){
+                this.character.printSlow("You open the book, on the first page it says: " + this.book);
+                this.readBook = true;
+                this.character.printSlow(this.bottom);
+    
+            } else {
+                this.character.printSlow("What do you want to read?");
+    
+            }
 
-        } else {
-            this.character.printSlow("What do you want to read?");
+        } else{
+            this.character.printSlow("There is nothing to read here");
 
         }
+        
     }    
-
-    /**
-     * Checks inventory and checks health.
-     * @param command string for user input.
-     */
-    public void actionCheck(String command){
-        if (command.contains("inventory")){
-            this.character.inventoryToString();
-
-        } else if (command.contains("health")){
-            this.character.healthToString();
-
-        }
-    }
 
     /**
      * Opens the door if the user is big enough lets them through.
@@ -331,7 +337,8 @@ public class RabbitHole {
     }
 
     /**
-     * 
+     * Allows the user to investigate a selected area
+     * @param command String for user input.
      */
     public void actionInvestigate(String command){
         if (command.contains("taboret") && this.readBook){
@@ -349,6 +356,9 @@ public class RabbitHole {
         }
     }
 
+    /**
+     * Prints out clues for possible key words.
+     */
     public void actionClue(){
         this.character.printSlow("+--------------------------------+");
         this.character.printSlow("|   Some Commands to try:        |");
