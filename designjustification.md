@@ -1,6 +1,4 @@
 Design Justification:
-- Design justification includes a discussion of at least one (reasonable) alternative design that could have been used, and the reasons why you decided against this alternative.
--Justify why we dont use extend
 
 We alternatively wanted to create a class called Character with an aggregate relationship to another class called Location. Location would construct and trigger the mini games if you were at the right place on the map. However, since each of the mini games require a character to play in order to adjust the users physical status, we could not pass a Character through Location as Location is an attribute of Character. Although we could have used return statements to store the value we wanted to change the characters physical status too, so that method would have been inefficient. We tried to extend Wonderland so that certain methods could be used in all of the other classes, but we found that it was easier to make all those methods availible through character, and since almost every class must have a character to work this strategy was effective.
 
