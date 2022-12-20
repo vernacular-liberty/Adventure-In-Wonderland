@@ -188,7 +188,10 @@ public class MarchManor {
             this.character.bag.add("pill");
             this.character.printSlow("Use the use or swallow command to take the pill.");
              
-        } 
+        } else if ((command.contains("cake")) && this.inKitchen){
+            this.character.bag.add("cake");
+            this.character.printSlow("Yummy 🍰 ");
+        }
        
     }
 
@@ -201,8 +204,10 @@ public class MarchManor {
             if (this.numCake >= 1){
                 if(this.character.bag.contains("fork")|| this.inKitchen){
                     this.character.health += this.character.health/4;
+                    this.numCake -= 1;
     
                 } else{
+                    this.numCake = 0;
                     this.character.health = 100;
                 }
                 this.character.printSlow(this.character.name +"'s health is "+ this.character.health);
@@ -256,31 +261,31 @@ public class MarchManor {
         }
     }
 
-    /**
-     * Takes pill every other pill is big or small.
-     * @param command string describing user input.
-     */
-    public void actionPill(String command){
+    // /**
+    //  * Takes pill every other pill is big or small.
+    //  * @param command string describing user input.
+    //  */
+    // public void actionPill(String command){
 
-        if (command.contains("pill") && this.character.bag.contains("pill")){
-            if (this.pill == "small"){
-                this.character.size /=2;
-                this.character.printSlow("You begin to shrink. Your size is now " + this.character.size + "inches tall.");
-                this.pill = "big";
+    //     if (command.contains("pill") && this.character.bag.contains("pill")){
+    //         if (this.pill == "small"){
+    //             this.character.size /=2;
+    //             this.character.printSlow("You begin to shrink. Your size is now " + this.character.size + "inches tall.");
+    //             this.pill = "big";
 
-            } else if(this.pill == "big"){
-                this.character.size *=2;
-                this.character.printSlow("You begin to grow and grow until you reach " + this.character.size + "inches tall.");
-                this.pill = "small";
-            }
-            this.character.bag.remove("pill");
+    //         } else if(this.pill == "big"){
+    //             this.character.size *=2;
+    //             this.character.printSlow("You begin to grow and grow until you reach " + this.character.size + "inches tall.");
+    //             this.pill = "small";
+    //         }
+    //         this.character.bag.remove("pill");
 
-        } else {
-            this.character.printSlow("You may not have what you want to take.");
+    //     } else {
+    //         this.character.printSlow("You may not have what you want to take.");
         
-        }     
+    //     }     
 
-    } 
+    // } 
 
     /**
      *  checks inventory or health
@@ -307,7 +312,7 @@ public class MarchManor {
     }
 
     public static void main(String[] args){
-        Character a = new Character( 1, 1);
+        Character a = new Character();
         MarchManor m = new MarchManor(a);
         m.play();
     }

@@ -1,5 +1,4 @@
 //imports
-import java.util.Random;
 import java.lang.Thread;
 
 public class Wonderland extends Thread{
@@ -8,7 +7,9 @@ public class Wonderland extends Thread{
     private FungiForest fungiForest;
     private RabbitHole rabbitHole;
     private TulgeyWoods tulgeyWoods;
+    private CheshireCat cat;
     private Boolean changeLocation;
+
     Character character;
 
 
@@ -19,12 +20,12 @@ public class Wonderland extends Thread{
         {"Welcome to the dismal mire...","You found a river. Should you drink the water? It could be dangerous...Strange things happen in Wonderland...", "Giant dragonflies swarm through the sky over your head squabbling over potential perches.","The trees around you begin to morph into oversized mushrooms. You are pleased pick some fungi and arrange them into a bouquet. Your stomach growls...", "You sense someone is watching you in the darkness! Move faster"}, 
         {"You cross the water to find a small door.","You reach the edge of a calm pond. Thirsty, you cup the water to your lips only to spit out a mouthful of tears.","","The forrest thicken. A sign points east saying, 'Enter at your own peril!'", "You wander down another one of the Tulgey woods winding purple roads. Will you ever escape?"}};
         
-        Random random = new Random();
-        Character character = new Character(random.nextInt(5), random.nextInt(5));
+        Character character = new Character();
         this.character = character;
-        this.fungiForest = new FungiForest(this.character);
+        this.fungiForest = new FungiForest(this.character,this.cat);
         this.tulgeyWoods = new TulgeyWoods(this.character);
         this.rabbitHole = new RabbitHole(this.character);
+
         this.changeLocation = true;
 
     }
@@ -208,7 +209,7 @@ public class Wonderland extends Thread{
         } if (this.map[this.character.locationC][this.character.locationR].contains("caterpillar")){
             this.fungiForest.conversation();
 
-        } if (this.map[this.character.locationC][this.character.locationR].contains("TulgeyEmma woods")){
+        } if (this.map[this.character.locationC][this.character.locationR].contains("Tulgeywoods")){
             this.tulgeyWoods.play();
 
         } if (this.map[this.character.locationC][this.character.locationR].contains("gabled")){
