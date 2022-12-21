@@ -26,7 +26,7 @@ public class Croquet {
     if (result == 0) {
       this.character.printSlow("You start! Show me what you can do.");
     } else {
-      System.out.println("ME FIRST!");
+      this.character.printSlow("ME FIRST!");
     }
   }
 
