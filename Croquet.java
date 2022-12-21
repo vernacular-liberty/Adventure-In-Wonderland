@@ -1,7 +1,7 @@
 //imports
 import java.util.Random;
 
-// import java.util.ArrayList;
+
 
 public class Croquet {
  
@@ -70,7 +70,7 @@ public class Croquet {
     } else if (size >= 100){
         this.character.health -= this.character.health / 8;
         this.character.printSlow("You play a few games. Although, you could use a rest due to your massive size the physical excertion is now too taxing. After the game your health is: " + this.character.health + ".");
-        
+        break;
     } else {
         this.character.health -= this.character.health / 4;
         this.character.printSlow("Your health is: " + this.character.health + ".");
