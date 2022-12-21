@@ -4,11 +4,6 @@ import java.util.Random;
 
 
 public class Croquet {
- 
-  int health;
-  int size;
-  String flamingo;
-  String hedgehog;
   int score;
   Character character;
   Object distance;
@@ -42,7 +37,7 @@ public class Croquet {
  * @return the score of the player after the game
  */
     public void play() {
-        this.size = 60;
+        this.character.size = 60;
         // Print a message to the console asking the player if they want to play
         this.character.printSlow("The queen demands that you play a game of croquet with her. Answer yes or no.");
       
@@ -62,12 +57,12 @@ public class Croquet {
     //   scan.close();
       
     while (true) {
-      if (size<= 30.0){
+      if (this.character.size<= 30.0){
         this.character.health -= this.character.health/2;
         this.character.printSlow("You are too small to be a player, so the Queen decided you would be more useful as a ball. After the game your health is: " + this.character.health + ".");
         break;
         
-    } else if (size >= 100){
+    } else if (this.character.size >= 100){
         this.character.health -= this.character.health / 8;
         this.character.printSlow("You play a few games. Although, you could use a rest due to your massive size the physical excertion is now too taxing. After the game your health is: " + this.character.health + ".");
         break;
