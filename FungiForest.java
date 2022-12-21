@@ -44,7 +44,9 @@ public class FungiForest {
         character.health-=5;
 
         System.out.println("Finally, the CATERPILLAR speaks.");
+        System.out.println();
         this.character.printSlow("CATERPILLAR: Whooo are yooou?");
+        this.character.printSlow("***********************");
 
         //define scanner
         Scanner response = new Scanner(System.in);
