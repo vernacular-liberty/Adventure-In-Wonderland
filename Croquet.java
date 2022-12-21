@@ -123,32 +123,6 @@ public class Croquet {
         }
     }
 }
-    
-    /**
-     * Prints text slowly
-     * @param text string for text to print slowly
-     */
-    public void printSlow(String text){
-      try {
-
-          char[] textArray = text. toCharArray();
-
-          for (int i = 0; i < textArray.length; i++) {
-              //Pause for 4 seconds
-              Thread.sleep(30);
-              //Print a message
-              if (i < textArray.length-1){
-                  System.out.print(textArray[i]);
-
-              } else {
-                  System.out.println(textArray[i]);
-
-              }
-          }
-      } catch (Exception e){
-
-      }
-  }
 public static void main(String[] args) {
     Character c = new Character(1,1);
     Croquet game = new Croquet(c);
