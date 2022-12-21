@@ -90,9 +90,9 @@ public class Croquet {
           this.character.printSlow("You hit the hedgehog " + distance + " feet!");
 
           // Update the ball's position on the court based on the distance it was hit
-          // ...
+          
         }
-        // Other possible commands
+       
 
         // Update the player's score based on their actions
         score += 10;
@@ -112,7 +112,7 @@ public class Croquet {
         this.character.printSlow("The queen hit the hedgehog " + distance + " feet!");
 
         // Update the ball's position on the court based on the distance it was hit
-        // ...
+        
 
         // Update the queen's score based on its actions
         score += 10;
