@@ -12,6 +12,6 @@ For Phase 2 we updated a lot of our code and our game is now officially playable
 # Contributors and Contributions
 Liberty Lehr: Wonderland, RabbitHole, MarchManor, Character.
 
-Lily Garner: TulgeyWoods, FungiForest
+Lily Garner: TulgeyWoods, FungiForest, CheshireCat
 
 Nathalie Trouba: Croquet
