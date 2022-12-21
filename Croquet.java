@@ -1,7 +1,7 @@
 //imports
 import java.util.Random;
 
-
+// import java.util.ArrayList;
 
 public class Croquet {
  
@@ -29,7 +29,7 @@ public class Croquet {
     int result = rand.nextInt(2); // Generate a random number between 0 and 1
 
     if (result == 0) {
-      System.out.println("You start! Show me what you can do.");
+      this.character.printSlow("You start! Show me what you can do.");
     } else {
       System.out.println("ME FIRST!");
     }
@@ -44,18 +44,18 @@ public class Croquet {
     public void play() {
         this.size = 60;
         // Print a message to the console asking the player if they want to play
-        System.out.println("The queen demands that you play a game of croquet with her. Answer yes or no.");
+        this.character.printSlow("The queen demands that you play a game of croquet with her. Answer yes or no.");
       
         // Read the user's input
         String command = this.character.command();
       
         // Print a message to the console based on the user's response
         if (command.equalsIgnoreCase("yes")) {
-          System.out.println("POSITIONS!");
+          this.character.printSlow("POSITIONS!");
         } else if (command.equalsIgnoreCase("no")) {
-          System.out.println("Too bad! You play or you die!!");
+          this.character.printSlow("Too bad! You play or you die!!");
         } else {
-          System.out.println("I have no clue what you're saying we're playing croquet..GRAB A FLAMINGO!");
+          this.character.printSlow("I have no clue what you're saying we're playing croquet..GRAB A FLAMINGO!");
       }
 
       // Close the Scanner object
@@ -64,22 +64,22 @@ public class Croquet {
     while (true) {
       if (size<= 30.0){
         this.character.health -= this.character.health/2;
-        System.out.println("You are too small to be a player, so the Queen decided you would be more useful as a ball. After the game your health is: " + this.character.health + ".");
+        this.character.printSlow("You are too small to be a player, so the Queen decided you would be more useful as a ball. After the game your health is: " + this.character.health + ".");
         break;
         
     } else if (size >= 100){
         this.character.health -= this.character.health / 8;
-        System.out.println("You play a few games. Although, you could use a rest due to your massive size the physical excertion is now too taxing. After the game your health is: " + this.character.health + ".");
+        this.character.printSlow("You play a few games. Although, you could use a rest due to your massive size the physical excertion is now too taxing. After the game your health is: " + this.character.health + ".");
         
     } else {
         this.character.health -= this.character.health / 4;
-        System.out.println("Your health is: " + this.character.health + ".");
+        this.character.printSlow("Your health is: " + this.character.health + ".");
     }
         firstTurn();
       // Begin the game loop
      
         // Prompt the player for a command
-        System.out.println("Enter a command to play your turn (e.g. hit ball, move ball, etc.)");
+        this.character.printSlow("Enter a command to play your turn (e.g. hit ball, move ball, etc.)");
         String playerCommand = this.character.command();
 
         // Handle the player's turn
@@ -87,7 +87,7 @@ public class Croquet {
           // Simulate the ball being hit by generating a random distance
           Random rand = new Random();
           int distance = rand.nextInt(10) + 1; // Generate a random number between 1 and 10
-          System.out.println("You hit the hedgehog " + distance + " feet!");
+          this.character.printSlow("You hit the hedgehog " + distance + " feet!");
 
           // Update the ball's position on the court based on the distance it was hit
           // ...
@@ -98,18 +98,18 @@ public class Croquet {
         score += 10;
 
         // Print the player's current score
-        System.out.println("Your score: " + score);
+        this.character.printSlow("Your score: " + score);
 
         // End the game if the player reaches a certain score
         if (score >= 50) {
-          System.out.println("You win! Congratulations!");
+          this.character.printSlow("You win! Congratulations!");
           break;
         }
 
         // Handle the queen's turn
         Random rand = new Random();
         distance = rand.nextInt(10) + 1; // Generate a random number between 1 and 10
-        System.out.println("The queen hit the hedgehog " + distance + " feet!");
+        this.character.printSlow("The queen hit the hedgehog " + distance + " feet!");
 
         // Update the ball's position on the court based on the distance it was hit
         // ...
@@ -118,17 +118,42 @@ public class Croquet {
         score += 10;
 
         // Print the queen's current score
-        System.out.println("The queen's score: " + score);
+        this.character.printSlow("The queen's score: " + score);
 
         // End the game if the queen reaches a certain score
         if (score >= 50){
-            System.out.println("OFF WITH YOUR HEAD");
-            System.out.println("GAME OVER");
+            this.character.printSlow("OFF WITH YOUR HEAD");
+            this.character.printSlow("GAME OVER");
             break;
         }
     }
 }
     
+    /**
+     * Prints text slowly
+     * @param text string for text to print slowly
+     */
+    public void printSlow(String text){
+      try {
+
+          char[] textArray = text. toCharArray();
+
+          for (int i = 0; i < textArray.length; i++) {
+              //Pause for 4 seconds
+              Thread.sleep(30);
+              //Print a message
+              if (i < textArray.length-1){
+                  System.out.print(textArray[i]);
+
+              } else {
+                  System.out.println(textArray[i]);
+
+              }
+          }
+      } catch (Exception e){
+
+      }
+  }
 public static void main(String[] args) {
     Character c = new Character(1,1);
     Croquet game = new Croquet(c);
