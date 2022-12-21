@@ -1,4 +1,4 @@
-Welcolme to your Adventure in Wonderland!
+Welcome to your Adventure in Wonderland!
 
 An interactive/choose-your-own-adventure/text-based game based off Alice's Adventures in Wonderland by Lewis Carrol.
 
