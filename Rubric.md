@@ -30,7 +30,7 @@ General Items (10 pts):
 
 **YES** 2 pts: Executes fully & consistently without crashing (exception/freeze).
 
-_____ 2 pt: Complies with style guidelines (missing items 1 pt each):
+**YES** 2 pt: Complies with style guidelines (missing items 1 pt each):
 
   **YES** Classes & class members all have Javadoc header comments.
 
